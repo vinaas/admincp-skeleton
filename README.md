@@ -6,8 +6,10 @@ Before you start, make sure you have a recent version of [NodeJS](http://nodejs.
 
 From the project folder, execute the following commands:
 
+Bước 1 cài đặt npm :
+
 ```shell
-npm install
+npm install 
 ```
 
 This will install all required dependencies, including a local version of Webpack that is going to
@@ -15,9 +17,11 @@ build and bundle the app. There is no need to install Webpack globally.
 
 To run the app execute the following command:
 
+Bước 2 : khởi động app (kết thúc)
 ```shell
 npm start
 ```
+Bước 3 : publish lên gh-pages github
 
 To publish the website (github page, branch gh-pages)
 ```shell
