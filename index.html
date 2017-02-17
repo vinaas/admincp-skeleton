@@ -4,6 +4,13 @@
     <meta charset="utf-8">
     <title><%- htmlWebpackPlugin.options.metadata.title %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <% if (htmlWebpackPlugin.options.metadata.ENV === 'development') { %>
+    <base href="<%- htmlWebpackPlugin.options.metadata.baseUrl %>">
+    <% } %>
+    <% if (htmlWebpackPlugin.options.metadata.ENV === 'production') { %>
+    <base href="<%- htmlWebpackPlugin.options.metadata.baseUrlProd %>">
+    <% } %>
+
     <base href="<%- htmlWebpackPlugin.options.metadata.baseUrl %>">
     <link href="assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" />
     <link href="assets/plugins/bootstrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -13,7 +20,7 @@
     <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="./node_modules/select2/dist/css/select2.min.css">
+    <!--<link rel="stylesheet" href="./node_modules/select2/dist/css/select2.min.css">-->
     
     <!-- imported CSS are concatenated and added automatically -->
   </head>
