@@ -11,6 +11,7 @@ export class App {
       { route: 'users', name: 'users', moduleId: './users', nav: true, title: 'Github Users' },
       { route: 'child-router', name: 'child-router', moduleId: './child-router', nav: true, title: 'Child Router' },
       { route: 'select2-example', name: 'select2-example', moduleId: './select2-ex', nav: true, title: 'Select2 example' },
+      { route: 'sweetalert-example', name: 'sweetalert-example', moduleId: './swal', nav: true, title: 'sweetalert example' }
     ]);
 
     this.router = router;

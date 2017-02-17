@@ -4,7 +4,9 @@
 // import 'font-awesome/css/font-awesome.css';
 // import 'bootstrap/dist/css/bootstrap.css';
 // import 'bootstrap';
-import "select2/dist/css/select2.min.css"
+import "select2/dist/css/select2.min.css";
+import "sweetalert";
+import "sweetalert/dist/sweetalert.css";
 // comment out if you don't want a Promise polyfill (remove also from webpack.config.js)
 import * as Bluebird from 'bluebird';
 Bluebird.config({ warnings: false });
