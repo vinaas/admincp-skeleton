@@ -156,7 +156,10 @@ Integration tests are performed with [Protractor](http://angular.github.io/protr
   ```shell
   npm run e2e:start
   ```
-
+4. Publish to gh-pages
+```shell
+npm run build:prod
+```
 ## Electron (coming soon)
 
 To add Electron support to the skeleton, first run:
