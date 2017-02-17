@@ -38,4 +38,10 @@ khai báo trong dile /index.html
 
 ### Bước tiếp
 
-Hùng thêm 1 module chạy thử và publish
+
+- Hùng thêm 1 module chạy thử
+  - Form html đăng nhập
+- Pubish lên page github
+- Tùng xử lý hành động đăng nhập + 1 số giải thích
+- Publish lên gage github (gh-pages) thông báo cho Hùng
+- Trao đổi giải thích thêm 
