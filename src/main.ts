@@ -14,6 +14,9 @@ Bluebird.config({ warnings: false });
 export async function configure(aurelia: Aurelia) {
   aurelia.use
     .standardConfiguration()
+    .plugin('ag-grid-aurelia')
+    .feature('resources')
+
     .developmentLogging();
 
   // Uncomment the line below to enable animation.
