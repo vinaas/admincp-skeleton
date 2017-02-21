@@ -2,9 +2,11 @@
   "compilerOptions": {
     "target": "es5",
     "module": "es2015",
+    "declaration": false,
+    "noImplicitAny": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "strictNullChecks": true,
+    "strictNullChecks": false,
     "moduleResolution": "node",
     "sourceMap": true,
     "allowJs": true,
