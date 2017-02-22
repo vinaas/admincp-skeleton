@@ -316,11 +316,7 @@
         <!-- START CONTAINER FLUID -->
         <div class="container-fluid container-fixed-lg">
           <!-- BEGIN PlACE PAGE CONTENT HERE -->
-          <ul if.bind="!router.currentInstruction.params.fromDocs" class="nav nav-pills">
-            <li role="presentation" class.bind="row.isActive ? 'active' : ''" repeat.for="row of router.navigation">
-              <a href.bind="row.href">${row.title}</a>
-            </li>
-          </ul>
+          
           <router-view></router-view>
           <!-- END PLACE PAGE CONTENT HERE -->
         </div>
