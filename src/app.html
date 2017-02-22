@@ -19,35 +19,16 @@
     <!-- BEGIN SIDEBAR MENU -->
     <div class="sidebar-menu">
       <div class="scroll-wrapper menu-items" style="position: relative;">
-        <ul class="menu-items scroll-content" style="height: 302px; margin-bottom: 0px; margin-right: 0px; max-height: none;">
-          <li class="m-t-30" repeat.for="row of router.navigation" class="${row.isActive ? 'active' : ''}">
+        <ul class="menu-items scroll-content">
+          <li class="m-t-30"></li>
+<!-- todo fix first with class m-t-30-->
+          <li class="" repeat.for="row of router.navigation" class="${row.isActive ? 'active' : ''}">
             <a href.bind="row.href" class="detailed">
               <span class="title">${row.title}</span>
-              <span class="details">...</span>
             </a>
             <span class="icon-thumbnail "><i class="pg-grid"></i></span>
           </li>
-          <li class="">
-            <a href="javascript:;">
-              <span class="title">Page 3</span>
-              <span class=" arrow"></span>
-            </a>
-            <span class="icon-thumbnail"><i class="pg-grid"></i></span>
-            <ul class="sub-menu">
-              <li class="">
-                <a href="#">Sub Page 1</a>
-                <span class="icon-thumbnail">sp</span>
-              </li>
-              <li class="">
-                <a href="#">Sub Page 2</a>
-                <span class="icon-thumbnail">sp</span>
-              </li>
-              <li class="">
-                <a href="#">Sub Page 3</a>
-                <span class="icon-thumbnail">sp</span>
-              </li>
-            </ul>
-          </li>
+        
         </ul>
         <div class="scroll-element scroll-x">
           <div class="scroll-element_outer">

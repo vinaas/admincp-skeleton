@@ -12,6 +12,7 @@ export class App {
       { route: 'child-router', name: 'child-router', moduleId: './child-router', nav: true, title: 'Child Router' },
       { route: 'select2-example', name: 'select2-example', moduleId: './select2-ex', nav: true, title: 'Select2 example' },
       { route: 'sweetalert-example', name: 'sweetalert-example', moduleId: './swal', nav: true, title: 'sweetalert examplenents' },
+      { route: 'login', name: 'login', moduleId: './login', nav: true, title: 'login' },
       {
         route: 'rich-grid/:fromDocs?',
         name: 'rich-grid',
