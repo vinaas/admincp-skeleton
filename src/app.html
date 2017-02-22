@@ -1,8 +1,7 @@
 <template>
-  <!--<require from="./nav-bar.html"></require>
-  
-  <nav-bar router.bind="router"></nav-bar>-->
-<div class="page-sidebar" data-pages="sidebar" style="transform: translate(210px, 0px);">
+  <require from="ag-grid/dist/styles/ag-grid.css"></require>
+  <require from="ag-grid/dist/styles/theme-fresh.css"></require>
+  <div class="page-sidebar" data-pages="sidebar" style="transform: translate(210px, 0px);">
       <div id="appMenu" class="sidebar-overlay-slide from-top">
       </div>
       <!-- BEGIN SIDEBAR HEADER -->
@@ -22,9 +21,9 @@
           <li class="m-t-30" repeat.for="row of router.navigation" class="${row.isActive ? 'active' : ''}">
             <a href.bind="row.href" class="detailed">
               <span class="title">${row.title}</span>
-              <span class="details">234 notifications</span>
+              <span class="details">...</span>
             </a>
-            <span class="icon-thumbnail "><i class="pg-mail"></i></span>
+            <span class="icon-thumbnail "><i class="pg-grid"></i></span>
           </li>
           <li class="">
             <a href="#">
