@@ -1,15 +1,38 @@
-import { Aurelia } from 'aurelia-framework';
+import { Aurelia, inject } from 'aurelia-framework';
 import { Router, RouterConfiguration } from 'aurelia-router';
+import {AuthService} from 'aurelia-auth';
 
-export class App {
-  router: Router;
+@inject(AuthService, Aurelia, Router )
 
-  configureRouter(config: RouterConfiguration, router: Router) {
-    config.title = 'Aurelia';
-    config.map([
-      { route: ['', 'login'], name: 'login', moduleId: './login', nav: true, title: 'login' },
-    ]);
+export class Login{
+	constructor(private auth:AuthService,private aurelia :Aurelia, private router: Router ){
 
-    this.router = router
+	};
+
+	heading = 'Login';
+	
+	email='';
+	password='';
+  login(){
+     this.router.navigate('/');
+     this.aurelia.setRoot('app')
+      .then(() => {
+                this.router.navigate('/');
+            });;
+    //   var creds = "grant_type=password&email=" + this.email + "&password=" + this.password;
+		// return this.auth.login(this.email, this.password)
+    //     //return this.auth.login(creds)
+		// .then(response=>{
+    //   alert("login success");
+		// 	console.log("success logged " + response);
+    //    this.aurelia.setRoot('app');
+		// })
+		// .catch(err=>{
+    //   alert("login failure")
+    //         err.json().then(function(e){
+    //         console.log("login failure : " + e.message);    
+    //         });
+			
+		// });
   }
 }

@@ -1,18 +1,19 @@
 import { Aurelia } from 'aurelia-framework';
 import { Router, RouterConfiguration } from 'aurelia-router';
+import {AuthorizeStep} from 'aurelia-auth';
 
 export class App {
   router: Router;
 
   configureRouter(config: RouterConfiguration, router: Router) {
     config.title = 'Aurelia';
+    // config.addPipelineStep('authorize', AuthorizeStep); // Add a route filter to the authorize extensibility point.
     config.map([
-      { route: ['', 'welcome'], name: 'welcome', moduleId: './welcome', nav: true, title: 'Welcome' },
+      { route: ['', 'welcome'], name: 'welcome', moduleId: './welcome', nav: true, title: 'Welcome', auth:true  },
       { route: 'users', name: 'users', moduleId: './users', nav: true, title: 'Github Users' },
       { route: 'child-router', name: 'child-router', moduleId: './child-router', nav: true, title: 'Child Router' },
       { route: 'select2-example', name: 'select2-example', moduleId: './select2-ex', nav: true, title: 'Select2 example' },
       { route: 'sweetalert-example', name: 'sweetalert-example', moduleId: './swal', nav: true, title: 'sweetalert examplenents' },
-      { route: 'login', name: 'login', moduleId: './login', nav: true, title: 'login' },
       {
         route: 'rich-grid/:fromDocs?',
         name: 'rich-grid',
@@ -71,6 +72,7 @@ export class App {
       }
     ]);
 
-    this.router = router
+    this.router = router;
+
   }
 }
