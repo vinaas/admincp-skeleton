@@ -16,6 +16,7 @@ export async function configure(aurelia: Aurelia) {
   aurelia.use
     .standardConfiguration()
     .plugin('ag-grid-aurelia')
+    .plugin('aurelia-validation')
     .feature('resources')
     // 	baseConfig.configure(config);
     // })
