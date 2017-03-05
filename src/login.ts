@@ -1,11 +1,9 @@
 import { Aurelia, inject } from 'aurelia-framework';
 import { Router, RouterConfiguration } from 'aurelia-router';
-import {AuthService} from 'aurelia-auth';
-
-@inject(AuthService, Aurelia, Router )
+@inject( Aurelia, Router )
 
 export class Login{
-	constructor(private auth:AuthService,private aurelia :Aurelia, private router: Router ){
+	constructor(private aurelia :Aurelia, private router: Router ){
 
 	};
 

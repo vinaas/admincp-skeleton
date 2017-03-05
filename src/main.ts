@@ -8,7 +8,6 @@ import {LicenseManager} from "ag-grid-enterprise/main";
 import "select2/dist/css/select2.min.css";
 import "sweetalert";
 import "sweetalert/dist/sweetalert.css";
-import config from "./configs/authen-config";
 // comment out if you don't want a Promise polyfill (remove also from webpack.config.js)
 import * as Bluebird from 'bluebird';
 
@@ -18,7 +17,6 @@ export async function configure(aurelia: Aurelia) {
     .standardConfiguration()
     .plugin('ag-grid-aurelia')
     .feature('resources')
-    // .plugin('aurelia-auth', (baseConfig)=>{   //the name of plugin becomes 'paulvanbladel/aurelia-auth'
     // 	baseConfig.configure(config);
     // })
 
