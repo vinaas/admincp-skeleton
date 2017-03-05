@@ -33,7 +33,7 @@ export async function configure(aurelia: Aurelia) {
   // LicenseManager.setLicenseKey('ag-Grid_EvaluationLicense_NotForProduction_100Devs24_April_2017__MTQ5Mjk4ODQwMDAwMA==45c3450a171d4f17e8facddb3f1162e2');
   await aurelia.start();
   
-  aurelia.setRoot('login');
+  aurelia.setRoot('app');
 
   // if you would like your website to work offline (Service Worker), 
   // install and enable the @easy-webpack/config-offline package in webpack.config.js and uncomment the following code:
