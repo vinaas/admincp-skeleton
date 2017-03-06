@@ -19,6 +19,13 @@ export async function configure(aurelia: Aurelia) {
     .standardConfiguration()
     .plugin('ag-grid-aurelia')
     .plugin('aurelia-validation')
+    .plugin('aurelia-dialog', config => {
+      config.useDefaults();
+      config.settings.lock = true;
+      config.settings.centerHorizontalOnly = false;
+      config.settings.startingZIndex = 5;
+      config.settings.enableEscClose = true;
+    })
     .feature('resources')
     // 	baseConfig.configure(config);
     // })
