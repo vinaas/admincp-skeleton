@@ -1,5 +1,5 @@
-﻿import {Aurelia} from 'aurelia-framework';
-import {LicenseManager} from "ag-grid-enterprise/main";
+﻿import { Aurelia } from 'aurelia-framework';
+import { LicenseManager } from "ag-grid-enterprise/main";
 // we want font-awesome to load as soon as possible to show the fa-spinner
 // import '../styles/styles.css';
 // import 'font-awesome/css/font-awesome.css';
@@ -12,6 +12,8 @@ import "sweetalert/dist/sweetalert.css";
 import * as Bluebird from 'bluebird';
 
 Bluebird.config({ warnings: false });
+
+
 export async function configure(aurelia: Aurelia) {
   aurelia.use
     .standardConfiguration()
@@ -31,7 +33,7 @@ export async function configure(aurelia: Aurelia) {
   // aurelia.use.plugin('aurelia-html-import-template-loader')
   // LicenseManager.setLicenseKey('ag-Grid_EvaluationLicense_NotForProduction_100Devs24_April_2017__MTQ5Mjk4ODQwMDAwMA==45c3450a171d4f17e8facddb3f1162e2');
   await aurelia.start();
-  
+
   aurelia.setRoot('app');
 
   // if you would like your website to work offline (Service Worker), 
@@ -41,3 +43,15 @@ export async function configure(aurelia: Aurelia) {
   offline.install();
   */
 }
+// init firebase
+
+var firebase = require("firebase/app");
+require("firebase/database");
+var config = {
+  apiKey: "AIzaSyC_fEKlapEbfm3yBtnnzttuqF5IOykQURQ",
+  authDomain: "admincp-skeleton-db.firebaseapp.com",
+  databaseURL: "https://admincp-skeleton-db.firebaseio.com",
+  storageBucket: "admincp-skeleton-db.appspot.com",
+  messagingSenderId: "593494488415"
+};
+firebase.initializeApp(config);
