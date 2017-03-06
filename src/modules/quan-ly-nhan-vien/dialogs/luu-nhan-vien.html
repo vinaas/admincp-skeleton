@@ -14,7 +14,7 @@
       <form submit.delegate="save()">
         <div class="form-group">
           <label>Tên</label>
-          <input type="text" class="form-control" value.bind="nhanVienDto.HoTen & validate">
+          <input attach-focus="true" type="text" class="form-control" value.bind="nhanVienDto.HoTen & validate">
         </div>
         <div class="form-group">
           <label>Email</label>
