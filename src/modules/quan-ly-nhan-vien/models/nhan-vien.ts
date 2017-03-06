@@ -1,4 +1,5 @@
 export class NhanVien{
+    public MaNv : number;
     HoTen :String;
     ChucVu:String;
     Email:String;
