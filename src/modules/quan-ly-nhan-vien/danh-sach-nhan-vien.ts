@@ -1,11 +1,14 @@
+import { SaveNhanVien } from './dialogs/luu-nhan-vien';
 
 import { inject } from "aurelia-dependency-injection";
 import { QuanLyNhanVienServicePrototype } from "./services/QuanLyNhanVienService.prototype";
 import { IQuanLyNhanVienService } from "./services/IQuanLyNhanVienService";
 import { NhanVien } from "./models/nhan-vien";
+import { DialogService } from 'aurelia-dialog';
 import { GridOptions, GridApi, ColumnApi } from "ag-grid";
+import swal from 'sweetalert';
 
-@inject(QuanLyNhanVienServicePrototype)
+@inject(QuanLyNhanVienServicePrototype, DialogService)
 export class DanhSachNhanVien {
 
   private gridOptions: GridOptions;
@@ -17,9 +20,9 @@ export class DanhSachNhanVien {
   private columnApi: ColumnApi;
   private allOfTheData: any;
   private columnDefs: any[];
-  constructor(private quanLyNhanVienService: IQuanLyNhanVienService) {
+  constructor(private quanLyNhanVienService: IQuanLyNhanVienService, private dialogService) {
     this.columnDefs = [
-      { headerName: "Mã", field: "MaNv", filter: 'text', filterParams: { apply: "false", newRowsAction: 'keep' } },
+      { headerName: "Mã", field: "MaNv", filter: 'number', filterParams: { apply: "false", newRowsAction: 'keep' } },
       { headerName: "Chức vụ", field: "ChucVu", suppressMenu: true },
       { headerName: "Họ tên", field: "HoTen", filter: 'text', filterParams: { newRowsAction: 'keep' } },
       { headerName: "Email", field: "Email", filter: 'text', filterParams: { newRowsAction: 'keep' } },
@@ -84,15 +87,73 @@ export class DanhSachNhanVien {
       }
     }
   }
-  public onActionViewClick(data: any) {
+  public onActionViewClick(data: NhanVien) {
     console.log("View action clicked", data);
   }
 
-  public onActionRemoveClick(data: any) {
-    console.log("Remove action clicked", data);
+  public onActionRemoveClick(data: NhanVien) {
+    swal({
+      title: "Bạn có chắc xóa không",
+      text: "Bạn sẽ không khôi phục lại được nhân viên nếu đã bị xóa",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Có, Xóa",
+      cancelButtonText: "Không, hủy thao tác!",
+      closeOnConfirm: false,
+      closeOnCancel: false
+    },
+      (isConfirm) => {
+        if (isConfirm) {
+          this.quanLyNhanVienService.DeleteNhanVien(data.MaNv).then(res => {
+            swal("Đã xóa!", "bạn đã xóa thành công", "success");
+            this.onReady();
+          }).catch(err => {
+            swal("Lỗi", "Thực hiện không thành công", "error");
+          })
+
+        } else {
+          swal("Đã hủy", "đã hủy thao tác", "error");
+        }
+      })
   }
-  public onActionEditClick(data: any) {
-    console.log("Edit action clicked", data);
+  public onActionEditClick(data: NhanVien) {
+    console.log("data from mng", data);
+    this.dialogService.open({ viewModel: SaveNhanVien, model: new NhanVien(data) }).then((result) => {
+      if (!result.wasCancelled) {
+        console.log('Save', result.output);
+        let editedNhanVien = result.output;
+        this.quanLyNhanVienService.PutNhanVien(editedNhanVien).then((res) => {
+          swal("Thành công", "Lưu thành công", "success");
+          this.onReady();
+        }).catch((err) => {
+
+          swal("Không thành công", `${err}`, "error")
+        });
+      } else {
+        console.log('Cancel');
+      }
+    });
+  }
+
+  themMoiNhanVien() {
+    this.dialogService.open({ viewModel: SaveNhanVien, model: new NhanVien() }).then((result) => {
+      if (!result.wasCancelled) {
+        console.log('Save', result.output);
+        let themMoiNhanVien: NhanVien = result.output;
+        themMoiNhanVien.MaNv = this._getRandomId(); // fake id
+        this.quanLyNhanVienService.PostNhanVien(themMoiNhanVien)
+          .then((res) => {
+            swal("Thành công", "Lưu thành công", "success");
+            this.onReady();
+          }).catch((err) => {
+
+            swal("Không thành công", `${err}`, "error")
+          });
+      } else {
+        console.log('Cancel');
+      }
+    });
   }
   createNewDatasource() {
     if (!this.allOfTheData) {
@@ -126,5 +187,11 @@ export class DanhSachNhanVien {
 
     this.gridOptions.api.setDatasource(dataSource);
 
+  }
+  private _getRandomId() {
+    return this._getRandomInt(1, 1000);
+  }
+  private _getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }

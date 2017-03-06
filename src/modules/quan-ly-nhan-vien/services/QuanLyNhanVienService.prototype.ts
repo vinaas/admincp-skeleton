@@ -43,10 +43,26 @@ export class QuanLyNhanVienServicePrototype implements IQuanLyNhanVienService {
     })
   }
   PutNhanVien(nhanVien: NhanVien): Promise<boolean> {
-    throw new Error('Method not implemented.');
+    return new Promise((resolve, reject) => {
+      this._db.ref('/users/' + nhanVien.MaNv).set(nhanVien, (error?) => {
+        if (error) {
+          reject(new Error('firebase errors'));
+        }
+      }).then((res) => {
+        resolve(res);
+      })
+    })
   }
   DeleteNhanVien(maNv: number): Promise<boolean> {
-    throw new Error('Method not implemented.');
+    return new Promise((resolve, reject) => {
+      let nhanVienBiXoa = this._db.ref('/users/' + maNv);
+      nhanVienBiXoa.remove().then(res => {
+        resolve(res)
+      })
+        .catch(err => {
+          reject(err)
+        });
+    })
   }
 
 
