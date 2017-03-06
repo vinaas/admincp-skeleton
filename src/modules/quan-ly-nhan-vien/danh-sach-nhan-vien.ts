@@ -7,6 +7,7 @@ import { GridOptions, GridApi, ColumnApi } from "ag-grid";
 
 @inject(QuanLyNhanVienServicePrototype)
 export class DanhSachNhanVien {
+
   private gridOptions: GridOptions;
   private showGrid: boolean;
   private rowData: any[];
@@ -18,10 +19,25 @@ export class DanhSachNhanVien {
   private columnDefs: any[];
   constructor(private quanLyNhanVienService: IQuanLyNhanVienService) {
     this.columnDefs = [
-      { headerName: "Mã", field: "MaNv", width: 90, filter: 'text', filterParams: { newRowsAction: 'keep' } },
-      { headerName: "Chức vụ", field: "ChucVu", width: 150, suppressMenu: true },
-      { headerName: "Họ tên", field: "HoTen", width: 90, filter: 'text', filterParams: { newRowsAction: 'keep' } },
-      { headerName: "Email", field: "Email", width: 120, filter: 'text', filterParams: { newRowsAction: 'keep' } }
+      { headerName: "Mã", field: "MaNv", filter: 'text', filterParams: { apply: "false", newRowsAction: 'keep' } },
+      { headerName: "Chức vụ", field: "ChucVu", suppressMenu: true },
+      { headerName: "Họ tên", field: "HoTen", filter: 'text', filterParams: { newRowsAction: 'keep' } },
+      { headerName: "Email", field: "Email", filter: 'text', filterParams: { newRowsAction: 'keep' } },
+      {
+        headerName: "Hành động",
+        suppressMenu: true,
+        suppressSorting: true,
+        template:
+        `<button type="button" data-action-type="view" >
+               Xem
+             </button>
+          <button type="button" data-action-type="edit" >
+               Sửa
+          </button>
+          <button type="button" data-action-type="remove" >
+               Xóa
+          </button>`
+      }
     ];
     this.gridOptions = {
       enableSorting: true,
@@ -52,6 +68,31 @@ export class DanhSachNhanVien {
       this.allOfTheData = res;
       this.createNewDatasource();
     })
+  }
+  public onRowClicked(e) {
+    if (e.event.target !== undefined) {
+      let data = e.data;
+      let actionType = e.event.target.getAttribute("data-action-type");
+
+      switch (actionType) {
+        case "view":
+          return this.onActionViewClick(data);
+        case "edit":
+          return this.onActionEditClick(data);
+        case "remove":
+          return this.onActionRemoveClick(data);
+      }
+    }
+  }
+  public onActionViewClick(data: any) {
+    console.log("View action clicked", data);
+  }
+
+  public onActionRemoveClick(data: any) {
+    console.log("Remove action clicked", data);
+  }
+  public onActionEditClick(data: any) {
+    console.log("Edit action clicked", data);
   }
   createNewDatasource() {
     if (!this.allOfTheData) {
