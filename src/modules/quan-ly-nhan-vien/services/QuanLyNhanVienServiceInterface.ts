@@ -1,5 +1,5 @@
 import { NhanVien } from "../models/nhan-vien";
-export interface IQuanLyNhanVienService {
+export interface QuanLyNhanVienServiceInterface {
   GetNhanVien(maNv: number): Promise<NhanVien>;
   GetNhanViens(): Promise<Array<NhanVien>>;
   PostNhanVien(nhanVien: NhanVien): Promise<NhanVien>;

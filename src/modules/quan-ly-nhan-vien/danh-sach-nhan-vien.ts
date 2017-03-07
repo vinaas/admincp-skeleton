@@ -1,8 +1,8 @@
+import { QuanLyNhanVienServiceInterface } from './services/QuanLyNhanVienServiceInterface';
 import { SaveNhanVien } from './dialogs/luu-nhan-vien';
 
 import { inject } from "aurelia-dependency-injection";
 import { QuanLyNhanVienServicePrototype } from "./services/QuanLyNhanVienService.prototype";
-import { IQuanLyNhanVienService } from "./services/IQuanLyNhanVienService";
 import { NhanVien } from "./models/nhan-vien";
 import { DialogService } from 'aurelia-dialog';
 import { GridOptions, GridApi, ColumnApi } from "ag-grid";
@@ -20,7 +20,7 @@ export class DanhSachNhanVien {
   private columnApi: ColumnApi;
   private allOfTheData: any;
   private columnDefs: any[];
-  constructor(private quanLyNhanVienService: IQuanLyNhanVienService, private dialogService) {
+  constructor(private quanLyNhanVienService: QuanLyNhanVienServiceInterface, private dialogService) {
     this.columnDefs = [
       {
         headerName: "Mã", field: "MaNv", filter: 'number'
@@ -143,7 +143,7 @@ export class DanhSachNhanVien {
       if (!result.wasCancelled) {
         console.log('Save', result.output);
         let themMoiNhanVien: NhanVien = result.output;
-        themMoiNhanVien.MaNv = this._getRandomId(); // fake id
+        themMoiNhanVien.MaNv = this.getRandomId(); // fake id
         this.quanLyNhanVienService.PostNhanVien(themMoiNhanVien)
           .then((res) => {
             swal("Thành công", "Lưu thành công", "success");
@@ -184,10 +184,10 @@ export class DanhSachNhanVien {
     this.gridOptions.api.setDatasource(dataSource);
 
   }
-  private _getRandomId() {
-    return this._getRandomInt(1000, 10000);
+  private getRandomId() {
+    return this.getRandomInt(1000, 10000);
   }
-  private _getRandomInt(min, max) {
+  private getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }
