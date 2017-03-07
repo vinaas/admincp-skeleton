@@ -65,6 +65,21 @@
           .on(NhanVien);
 
   ```
+1. Định nghĩa các CRUD services cho module trong thư mục `src/modules/ten-module/services`
+  - IQuanLyNhanVienService.ts
+  ```javascript
+      import { NhanVien } from "../models/nhan-vien";
+      export interface IQuanLyNhanVienService {
+      GetNhanVien(maNv: number): Promise<NhanVien>;
+      GetNhanViens(): Promise<Array<NhanVien>>;
+      PostNhanVien(nhanVien: NhanVien): Promise<NhanVien>;
+      PutNhanVien(nhanVien: NhanVien): Promise<boolean>;
+      DeleteNhanVien(maNv: number): Promise<boolean>;
+      }
+  ```
+  - QuanLyNhanVienService.prototype.ts  //fake data, using firebase implement CRUD
+  - QuanLyNhanVienService.ts // implement restful apis
+  
 
 
 
