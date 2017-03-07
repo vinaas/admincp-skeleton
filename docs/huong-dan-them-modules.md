@@ -1,8 +1,8 @@
 # Hướng dẫn thêm một module mới
 
 ### Thêm 1 module
-- Tạo 1 folder `ten-module` trong thư mục `/src/modules/`
-- Tạo 1 cặp view , view model: `index.html` và `index.ts` (định nghĩa child_route các thành phần trong module)
+1. Tạo 1 folder `ten-module` trong thư mục `/src/modules/`
+1. Tạo các thành phần giao diện( cặp view , view model) cho module , tham khảo [Creating Components](http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/creating-components/1)
   - view `index.html`
 
     ```html    
@@ -39,5 +39,33 @@
         }
       }
     ```
+1. Định nghĩa các model liên quan đến module và [validation](http://aurelia.io/hub.html#/doc/article/aurelia/validation/latest/validation-basics) rules trong thư mục `src/modules/ten-module/models`
+  - nhan-vien.ts
+  ```javascript
+        export class NhanVien {
+          public MaNv: number;
+          HoTen: String;
+          ChucVu: String;
+          Email: String;
+          constructor(nhanVien: any = { MaNv: 0 }) {
+              this.MaNv = nhanVien.MaNv;
+              this.ChucVu = nhanVien.ChucVu;
+              this.Email = nhanVien.Email;
+              this.HoTen = nhanVien.HoTen;
+
+          }
+      }
+
+      // define validation model
+      import { ValidationRules } from 'aurelia-validation';
+      ValidationRules
+          .ensure((x: NhanVien) => x.HoTen).required()
+          .ensure(x => x.ChucVu).required()
+          .ensure(x => x.Email).required().email()
+          .on(NhanVien);
+
+  ```
+
+
 
 
