@@ -4,13 +4,13 @@ import * as firebase from 'firebase';
 import * as _ from 'lodash';
 
 export class QuanLyNhanVienServicePrototype implements QuanLyNhanVienServiceInterface {
-  private _db = firebase.database();
+  private db = firebase.database();
   constructor() {
   }
 
   GetNhanVien(maNv: number): Promise<NhanVien> {
     return new Promise((resolve, reject) => {
-      this._db.ref('/users/' + maNv).once('value').then(function (snapshot) {
+      this.db.ref('/users/' + maNv).once('value').then(function (snapshot) {
         var nhanVien = snapshot.val();
         resolve(new NhanVien(nhanVien));
       }, err => reject(err));
@@ -18,7 +18,7 @@ export class QuanLyNhanVienServicePrototype implements QuanLyNhanVienServiceInte
   }
   GetNhanViens(): Promise<NhanVien[]> {
     return new Promise((resolve, reject) => {
-      this._db.ref('/users').once('value').then(function (snapshot) {
+      this.db.ref('/users').once('value').then(function (snapshot) {
         var nhanViens = snapshot.val();
         console.log(`nhan viens`, nhanViens);
         resolve(_.values(nhanViens));
@@ -27,7 +27,7 @@ export class QuanLyNhanVienServicePrototype implements QuanLyNhanVienServiceInte
   }
   PostNhanVien(nhanVien: NhanVien): Promise<NhanVien> {
     return new Promise((resolve, reject) => {
-      this._db.ref('/users/' + nhanVien.MaNv).set(nhanVien, (error?) => {
+      this.db.ref('/users/' + nhanVien.MaNv).set(nhanVien, (error?) => {
         if (error) {
           reject(new Error('firebase errors'));
         }
@@ -38,7 +38,7 @@ export class QuanLyNhanVienServicePrototype implements QuanLyNhanVienServiceInte
   }
   PutNhanVien(nhanVien: NhanVien): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      this._db.ref('/users/' + nhanVien.MaNv).set(nhanVien, (error?) => {
+      this.db.ref('/users/' + nhanVien.MaNv).set(nhanVien, (error?) => {
         if (error) {
           reject(new Error('firebase errors'));
         }
@@ -49,7 +49,7 @@ export class QuanLyNhanVienServicePrototype implements QuanLyNhanVienServiceInte
   }
   DeleteNhanVien(maNv: number): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      let nhanVienBiXoa = this._db.ref('/users/' + maNv);
+      let nhanVienBiXoa = this.db.ref('/users/' + maNv);
       nhanVienBiXoa.remove().then(res => {
         resolve(res)
       })
