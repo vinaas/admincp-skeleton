@@ -79,7 +79,7 @@
   ```
   - QuanLyNhanVienService.prototype.ts  //fake data, using firebase implement CRUD
   - QuanLyNhanVienService.ts // implement restful apis
-1. Định nghĩa dialogs cho mudule trong thư mục `src/modules/ten-module/dialogs`
+1. Định nghĩa [dialogs](https://github.com/aurelia/dialog) cho mudule trong thư mục `src/modules/ten-module/dialogs`
  - Để chia nhỏ các chức năng quản lý cho module như xem, thêm mới, xóa, cập nhật.
  - luu-nhan-vien.html
   ```html
