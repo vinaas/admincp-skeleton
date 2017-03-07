@@ -4,8 +4,8 @@
 - Tạo 1 folder `ten-module` trong thư mục `/src/modules/`
 - Tạo 1 cặp view , view model: `index.html` và `index.ts` (định nghĩa child_route các thành phần trong module)
   - view `index.html`
-    ```html
-     <source-code lang="html">
+
+    ```html    
       <template>
       <section class="au-animate">
         <h2>${heading}</h2>
@@ -23,9 +23,9 @@
         </div>
       </section>
     </template>
-    </source-code>
     ```
   - viewmodel `index.html`
+
     ```javascript
       import { inject } from 'aurelia-dependency-injection';
       import { Router, RouterConfiguration } from 'aurelia-router';
