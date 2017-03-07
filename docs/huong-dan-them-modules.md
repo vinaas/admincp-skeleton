@@ -79,6 +79,85 @@
   ```
   - QuanLyNhanVienService.prototype.ts  //fake data, using firebase implement CRUD
   - QuanLyNhanVienService.ts // implement restful apis
+1. Định nghĩa dialogs cho mudule trong thư mục `src/modules/ten-module/dialogs`
+ - Để chia nhỏ các chức năng quản lý cho module như xem, thêm mới, xóa, cập nhật.
+ - luu-nhan-vien.html
+  ```html
+      <template>
+      <style>
+        ai-dialog-overlay.active {
+          background-color: black;
+          opacity: .5;
+        }
+
+      </style>
+      <ai-dialog>
+        <ai-dialog-header>
+        </ai-dialog-header>
+        <ai-dialog-body>
+          <h2>${getTieuDe}</h2>
+          <form submit.delegate="save()">
+            <div class="form-group">
+              <label>Tên</label>
+              <input attach-focus="true" type="text" class="form-control" value.bind="nhanVienDto.HoTen & validateOnChange">
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="text" class="form-control" value.bind="nhanVienDto.Email & validate">
+            </div>
+            <div class="form-group">
+              <label>Chức vụ</label>
+              <input type="text" class="form-control" value.bind="nhanVienDto.ChucVu & validate">
+            </div>
+
+            <button class="btn btn-primary" type="submit">Ok</button>
+            <button class="btn btn-warning" click.trigger="controller.cancel()">Cancel</button>
+          </form>
+        </ai-dialog-body>
+      </ai-dialog>
+    </template>
+
+  ```
+  - luu-nhan-vien.ts
+  ```javasript
+      import { BootstrapFormRenderer } from './../../../helpers/bootstrap-form-renderer';
+    import { inject } from 'aurelia-framework';
+    import { NhanVien } from './../models/nhan-vien';
+    import { DialogController } from "aurelia-dialog";
+    import { ValidationControllerFactory, ValidationController } from "aurelia-validation";
+    @inject(DialogController, ValidationControllerFactory)
+
+    export class SaveNhanVien {
+        validationcontroller: ValidationController;
+        constructor(private controller, private controllerFactory) {
+            this.validationcontroller = controllerFactory.createForCurrentScope();
+            this.validationcontroller.addRenderer(new BootstrapFormRenderer());
+        }
+        get getTieuDe() {
+            switch (this.nhanVienDto.MaNv) {
+                case 0:
+                    return "Thêm mới nhân viên";
+
+                default:
+                    return "Cập nhật nhân viên";
+            }
+        }
+        nhanVienDto: NhanVien;
+        activate(dto: NhanVien) {
+            console.log('dto', dto);
+            this.nhanVienDto = dto;
+        }
+        save() {
+            this.validationcontroller.validate().then((result) => {
+                if (result.valid) {
+                    this.controller.ok(this.nhanVienDto);
+                }
+            })
+
+        }
+
+    }
+  ```
   
 
 
