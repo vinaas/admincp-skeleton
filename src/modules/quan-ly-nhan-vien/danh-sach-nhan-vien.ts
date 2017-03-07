@@ -22,7 +22,10 @@ export class DanhSachNhanVien {
   private columnDefs: any[];
   constructor(private quanLyNhanVienService: IQuanLyNhanVienService, private dialogService) {
     this.columnDefs = [
-      { headerName: "Mã", field: "MaNv", filter: 'number', filterParams: { apply: "false", newRowsAction: 'keep' } },
+      {
+        headerName: "Mã", field: "MaNv", filter: 'number', suppressMenu: true,
+        suppressSorting: true, filterParams: { apply: "false", newRowsAction: 'keep' }
+      },
       { headerName: "Chức vụ", field: "ChucVu", suppressMenu: true },
       { headerName: "Họ tên", field: "HoTen", filter: 'text', filterParams: { newRowsAction: 'keep' } },
       { headerName: "Email", field: "Email", filter: 'text', filterParams: { newRowsAction: 'keep' } },
@@ -31,13 +34,13 @@ export class DanhSachNhanVien {
         suppressMenu: true,
         suppressSorting: true,
         template:
-        `<button type="button" data-action-type="view" >
+        `<button type="button" class="btn btn-xs" data-action-type="view" >
                Xem
              </button>
-          <button type="button" data-action-type="edit" >
+          <button type="button" class="btn btn-xs" data-action-type="edit" >
                Sửa
           </button>
-          <button type="button" data-action-type="remove" >
+          <button type="button" class="btn btn-xs" data-action-type="remove" >
                Xóa
           </button>`
       }
@@ -157,25 +160,14 @@ export class DanhSachNhanVien {
   }
   createNewDatasource() {
     if (!this.allOfTheData) {
-      // in case user selected 'onPageSizeChanged()' before the json was loaded
       return;
     }
     var dataSource = {
-      //rowCount: ???, - not setting the row count, infinite paging will be used
       getRows: (params) => {
-        // this code should contact the server for rows. however for the purposes of the demo,
-        // the data is generated locally, a timer is used to give the experience of
-        // an asynchronous call
         console.log('asking for ' + params.startRow + ' to ' + params.endRow);
         setTimeout(() => {
-          // take a chunk of the array, matching the start and finish times
-          // var dataAfterSortingAndFiltering = sortAndFilter(params.sortModel, params.filterModel);
           console.log("allOfTheDate when create datasource : ", this.allOfTheData);
           var rowsThisPage = this.allOfTheData.slice(params.startRow, params.endRow);
-          // see if we have come to the last page. if we have, set lastRow to
-          // the very last row of the last page. if you are getting data from
-          // a server, lastRow could be returned separately if the lastRow
-          // is not in the current page.
           var lastRow = -1;
           if (this.allOfTheData.length <= params.endRow) {
             lastRow = this.allOfTheData.length;
