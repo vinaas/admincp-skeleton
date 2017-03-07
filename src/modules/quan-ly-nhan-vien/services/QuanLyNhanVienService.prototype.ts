@@ -13,10 +13,8 @@ export class QuanLyNhanVienServicePrototype implements IQuanLyNhanVienService {
       this._db.ref('/users/' + maNv).once('value').then(function (snapshot) {
         var nhanVien = snapshot.val();
         resolve(new NhanVien(nhanVien));
-      });
-      reject(new Error('firebase errors'));
+      }, err => reject(err));
     })
-
   }
   GetNhanViens(): Promise<NhanVien[]> {
     return new Promise((resolve, reject) => {
@@ -24,8 +22,7 @@ export class QuanLyNhanVienServicePrototype implements IQuanLyNhanVienService {
         var nhanViens = snapshot.val();
         console.log(`nhan viens`, nhanViens);
         resolve(_.values(nhanViens));
-      });
-      // reject(new Error('firebase errors'));
+      }, err => reject(err));
     })
   }
   PostNhanVien(nhanVien: NhanVien): Promise<NhanVien> {
@@ -33,13 +30,10 @@ export class QuanLyNhanVienServicePrototype implements IQuanLyNhanVienService {
       this._db.ref('/users/' + nhanVien.MaNv).set(nhanVien, (error?) => {
         if (error) {
           reject(new Error('firebase errors'));
-
         }
       }).then((res) => {
         resolve(res);
       })
-
-
     })
   }
   PutNhanVien(nhanVien: NhanVien): Promise<boolean> {
@@ -64,6 +58,4 @@ export class QuanLyNhanVienServicePrototype implements IQuanLyNhanVienService {
         });
     })
   }
-
-
 }
