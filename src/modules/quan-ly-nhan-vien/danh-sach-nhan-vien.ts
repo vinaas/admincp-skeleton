@@ -23,12 +23,11 @@ export class DanhSachNhanVien {
   constructor(private quanLyNhanVienService: IQuanLyNhanVienService, private dialogService) {
     this.columnDefs = [
       {
-        headerName: "Mã", field: "MaNv", filter: 'number', suppressMenu: true,
-        suppressSorting: true, filterParams: { apply: "false", newRowsAction: 'keep' }
+        headerName: "Mã", field: "MaNv", filter: 'number'
       },
-      { headerName: "Chức vụ", field: "ChucVu", suppressMenu: true },
-      { headerName: "Họ tên", field: "HoTen", filter: 'text', filterParams: { newRowsAction: 'keep' } },
-      { headerName: "Email", field: "Email", filter: 'text', filterParams: { newRowsAction: 'keep' } },
+      { headerName: "Chức vụ", field: "ChucVu", suppressMenu: false, suppressSorting: true },
+      { headerName: "Họ tên", field: "HoTen", filter: 'text', filterParams: { apply: true, newRowsAction: 'keep' }, suppressMenu: false, suppressSorting: true },
+      { headerName: "Email", field: "Email", filter: 'text', filterParams: { newRowsAction: 'keep' },suppressMenu: false, suppressSorting: true  },
       {
         headerName: "Hành động",
         suppressMenu: true,
@@ -49,7 +48,7 @@ export class DanhSachNhanVien {
       enableSorting: true,
       enableFilter: true,
       enableColResize: true,
-      paginationPageSize: 10,
+      paginationPageSize: 100,
       columnDefs: this.columnDefs,
       rowModelType: 'pagination',
       rowSelection: 'multiple',
@@ -110,7 +109,7 @@ export class DanhSachNhanVien {
         if (isConfirm) {
           this.quanLyNhanVienService.DeleteNhanVien(data.MaNv).then(res => {
             swal("Đã xóa!", "bạn đã xóa thành công", "success");
-            this.onReady();
+            // this.onReady();
           }).catch(err => {
             swal("Lỗi", "Thực hiện không thành công", "error");
           })
@@ -128,7 +127,7 @@ export class DanhSachNhanVien {
         let editedNhanVien = result.output;
         this.quanLyNhanVienService.PutNhanVien(editedNhanVien).then((res) => {
           swal("Thành công", "Lưu thành công", "success");
-          this.onReady();
+          // this.onReady();
         }).catch((err) => {
 
           swal("Không thành công", `${err}`, "error")
@@ -148,7 +147,7 @@ export class DanhSachNhanVien {
         this.quanLyNhanVienService.PostNhanVien(themMoiNhanVien)
           .then((res) => {
             swal("Thành công", "Lưu thành công", "success");
-            this.onReady();
+            // this.onReady();
           }).catch((err) => {
 
             swal("Không thành công", `${err}`, "error")
@@ -164,24 +163,29 @@ export class DanhSachNhanVien {
     }
     var dataSource = {
       getRows: (params) => {
-        console.log('asking for ' + params.startRow + ' to ' + params.endRow);
-        setTimeout(() => {
-          console.log("allOfTheDate when create datasource : ", this.allOfTheData);
+        // console.log('asking for ' + params.startRow + ' to ' + params.endRow);
+        // setTimeout(() => {
+        //   console.log("allOfTheDate when create datasource : ", this.allOfTheData);
+
+        // }, 500);
+        this.quanLyNhanVienService.GetNhanViens().then(res => {
+          this.allOfTheData = res;
           var rowsThisPage = this.allOfTheData.slice(params.startRow, params.endRow);
           var lastRow = -1;
           if (this.allOfTheData.length <= params.endRow) {
             lastRow = this.allOfTheData.length;
           }
           params.successCallback(rowsThisPage, lastRow);
-        }, 500);
-      }
+        })
+      },
+      rowCount: this.allOfTheData.length
     };
 
     this.gridOptions.api.setDatasource(dataSource);
 
   }
   private _getRandomId() {
-    return this._getRandomInt(1, 1000);
+    return this._getRandomInt(1000, 10000);
   }
   private _getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
