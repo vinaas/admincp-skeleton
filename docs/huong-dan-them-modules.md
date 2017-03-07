@@ -120,7 +120,8 @@
   ```
   - luu-nhan-vien.ts
   ```javasript
-      import { BootstrapFormRenderer } from './../../../helpers/bootstrap-form-renderer';
+
+    import { BootstrapFormRenderer } from './../../../helpers/bootstrap-form-renderer';
     import { inject } from 'aurelia-framework';
     import { NhanVien } from './../models/nhan-vien';
     import { DialogController } from "aurelia-dialog";
