@@ -119,7 +119,7 @@
 
   ```
   - luu-nhan-vien.ts
-  ```javasript
+  ```javascript
 
     import { BootstrapFormRenderer } from './../../../helpers/bootstrap-form-renderer';
     import { inject } from 'aurelia-framework';
