@@ -1,52 +1,59 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title><%- htmlWebpackPlugin.options.metadata.title %></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-     <% if (htmlWebpackPlugin.options.metadata.ENV === 'development') { %>
-    <base href="<%- htmlWebpackPlugin.options.metadata.baseUrl %>">
-    <% } %>
-    <% if (htmlWebpackPlugin.options.metadata.ENV === 'production') { %>
-    <base href="<%- htmlWebpackPlugin.options.metadata.baseUrlProd %>">
-    <% } %>
 
+<head>
+  <meta charset="utf-8">
+  <title>
+    <%- htmlWebpackPlugin.options.metadata.title %>
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <% if (htmlWebpackPlugin.options.metadata.ENV === 'development') { %>
     <base href="<%- htmlWebpackPlugin.options.metadata.baseUrl %>">
-    <link href="assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/bootstrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
-    <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
-    <!--<link rel="stylesheet" href="./node_modules/select2/dist/css/select2.min.css">-->
-    
-    <!-- imported CSS are concatenated and added automatically -->
-  </head>
-  <body aurelia-app="main" class="fixed-header  windows desktop pace-done sidebar-visible menu-pin">
-    <div class="splash">
-      <div class="message"><%- htmlWebpackPlugin.options.metadata.title %></div>
-      <i class="fa fa-spinner fa-spin"></i>
+    <% } %>
+      <% if (htmlWebpackPlugin.options.metadata.ENV === 'production') { %>
+        <base href="<%- htmlWebpackPlugin.options.metadata.baseUrlProd %>">
+        <% } %>
+          <link rel="icon" type="image/png" href="favicon.ico">
+          <base href="<%- htmlWebpackPlugin.options.metadata.baseUrl %>">
+          <link href="assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" />
+          <link href="assets/plugins/bootstrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+          <link href="assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+          <link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
+          <link href="assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen" />
+          <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
+          <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
+          <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
+          <!--<link rel="stylesheet" href="./node_modules/select2/dist/css/select2.min.css">-->
+
+          <!-- imported CSS are concatenated and added automatically -->
+</head>
+
+<body aurelia-app="main" class="fixed-header  windows desktop pace-done sidebar-visible menu-pin">
+  <div class="splash">
+    <div class="message">
+      <%- htmlWebpackPlugin.options.metadata.title %>
     </div>
+    <i class="fa fa-spinner fa-spin"></i>
+  </div>
 
-     <!-- BEGIN VENDOR JS -->
-    <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery/jquery-1.11.1.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/modernizr.custom.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/bootstrapv3/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery/jquery-easy.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-bez/jquery.bez.min.js"></script>
-    <script src="assets/plugins/jquery-ios-list/jquery.ioslist.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <script src="assets/plugins/jquery-actual/jquery.actual.min.js"></script>
-    <script src="assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-    <!-- END VENDOR JS -->
-    <% if (htmlWebpackPlugin.options.metadata.ENV === 'development') { %>
+  <!-- BEGIN VENDOR JS -->
+  <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
+  <script src="assets/plugins/jquery/jquery-1.11.1.min.js" type="text/javascript"></script>
+  <script src="assets/plugins/modernizr.custom.js" type="text/javascript"></script>
+  <script src="assets/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+  <script src="assets/plugins/bootstrapv3/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="assets/plugins/jquery/jquery-easy.js" type="text/javascript"></script>
+  <script src="assets/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script>
+  <script src="assets/plugins/jquery-bez/jquery.bez.min.js"></script>
+  <script src="assets/plugins/jquery-ios-list/jquery.ioslist.min.js" type="text/javascript"></script>
+  <script src="assets/plugins/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/plugins/jquery-actual/jquery.actual.min.js"></script>
+  <script src="assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+  <!-- END VENDOR JS -->
+  <% if (htmlWebpackPlugin.options.metadata.ENV === 'development') { %>
     <!-- Webpack Dev Server reload -->
     <script src="/webpack-dev-server.js"></script>
     <% } %>
-  </body>
+</body>
+
 </html>
