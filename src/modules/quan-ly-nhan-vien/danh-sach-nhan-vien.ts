@@ -109,7 +109,7 @@ export class DanhSachNhanVien {
         if (isConfirm) {
           this.quanLyNhanVienService.DeleteNhanVien(data.MaNv).then(res => {
             swal("Đã xóa!", "bạn đã xóa thành công", "success");
-            // this.onReady();
+            this.onReady();
           }).catch(err => {
             swal("Lỗi", "Thực hiện không thành công", "error");
           })
@@ -127,7 +127,7 @@ export class DanhSachNhanVien {
         let editedNhanVien = result.output;
         this.quanLyNhanVienService.PutNhanVien(editedNhanVien).then((res) => {
           swal("Thành công", "Lưu thành công", "success");
-          // this.onReady();
+          this.onReady();
         }).catch((err) => {
 
           swal("Không thành công", `${err}`, "error")
