@@ -7,7 +7,7 @@ export class App {
     config.title = 'Aurelia';
     config.map([
       {
-        route: ['', 'dashboard'], name: 'dashboard', moduleId: 'modules/dashboard/index', nav: true, title: 'dashboard',
+        route: ['', 'dashboard'], name: 'dashboard', moduleId: 'modules/dashboard/index', nav: true, title: 'Dashboard',
         settings: { icon: 'pg-home' }
       },
       {
