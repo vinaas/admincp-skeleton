@@ -27,7 +27,7 @@ export class DanhSachNhanVien {
       },
       { headerName: "Chức vụ", field: "ChucVu", suppressMenu: false, suppressSorting: true },
       { headerName: "Họ tên", field: "HoTen", filter: 'text', filterParams: { apply: true, newRowsAction: 'keep' }, suppressMenu: false, suppressSorting: true },
-      { headerName: "Email", field: "Email", filter: 'text', filterParams: { newRowsAction: 'keep' },suppressMenu: false, suppressSorting: true  },
+      { headerName: "Email", field: "Email", filter: 'text', filterParams: { newRowsAction: 'keep' }, suppressMenu: false, suppressSorting: true },
       {
         headerName: "Hành động",
         suppressMenu: true,
@@ -109,7 +109,7 @@ export class DanhSachNhanVien {
         if (isConfirm) {
           this.quanLyNhanVienService.DeleteNhanVien(data.MaNv).then(res => {
             swal("Đã xóa!", "bạn đã xóa thành công", "success");
-            // this.onReady();
+            this.onReady();
           }).catch(err => {
             swal("Lỗi", "Thực hiện không thành công", "error");
           })
@@ -127,7 +127,7 @@ export class DanhSachNhanVien {
         let editedNhanVien = result.output;
         this.quanLyNhanVienService.PutNhanVien(editedNhanVien).then((res) => {
           swal("Thành công", "Lưu thành công", "success");
-          // this.onReady();
+          this.onReady();
         }).catch((err) => {
 
           swal("Không thành công", `${err}`, "error")
@@ -143,11 +143,10 @@ export class DanhSachNhanVien {
       if (!result.wasCancelled) {
         console.log('Save', result.output);
         let themMoiNhanVien: NhanVien = result.output;
-        themMoiNhanVien.MaNv = this._getRandomId(); // fake id
         this.quanLyNhanVienService.PostNhanVien(themMoiNhanVien)
           .then((res) => {
             swal("Thành công", "Lưu thành công", "success");
-            // this.onReady();
+            this.onReady();
           }).catch((err) => {
 
             swal("Không thành công", `${err}`, "error")
@@ -183,11 +182,5 @@ export class DanhSachNhanVien {
 
     this.gridOptions.api.setDatasource(dataSource);
 
-  }
-  private _getRandomId() {
-    return this._getRandomInt(1000, 10000);
-  }
-  private _getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }

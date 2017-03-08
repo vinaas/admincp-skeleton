@@ -1,44 +1,58 @@
+import { NhanVien } from './../models/nhan-vien';
 import { IQuanLyNhanVienService } from "./IQuanLyNhanVienService";
-import { NhanVien } from "../models/nhan-vien";
 import * as firebase from 'firebase';
 import * as _ from 'lodash';
 
 export class QuanLyNhanVienServicePrototype implements IQuanLyNhanVienService {
-  private _db = firebase.database();
+  private db = firebase.database();
   constructor() {
   }
 
   GetNhanVien(maNv: number): Promise<NhanVien> {
     return new Promise((resolve, reject) => {
-      this._db.ref('/users/' + maNv).once('value').then(function (snapshot) {
+      let nhanViens: NhanVien[];
+      this.db.ref('/users/' + maNv).once('value').then(function (snapshot) {
         var nhanVien = snapshot.val();
         resolve(new NhanVien(nhanVien));
-      }, err => reject(err));
-    })
+      })
+        .catch(err => reject(err));
+    }
+    )
   }
   GetNhanViens(): Promise<NhanVien[]> {
     return new Promise((resolve, reject) => {
-      this._db.ref('/users').once('value').then(function (snapshot) {
-        var nhanViens = snapshot.val();
-        console.log(`nhan viens`, nhanViens);
-        resolve(_.values(nhanViens));
+      let nhanViens: NhanVien[] = [];
+      this.db.ref('/users').once('value').then(function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+          var childKey = childSnapshot.key;
+          var childData = childSnapshot.val();
+          let nhanVien = new NhanVien(_.assignIn({ MaNv: childKey }, childData));
+          nhanViens.push(nhanVien);
+          resolve(nhanViens);
+        });
       }, err => reject(err));
     })
   }
   PostNhanVien(nhanVien: NhanVien): Promise<NhanVien> {
+
     return new Promise((resolve, reject) => {
-      this._db.ref('/users/' + nhanVien.MaNv).set(nhanVien, (error?) => {
-        if (error) {
-          reject(new Error('firebase errors'));
-        }
-      }).then((res) => {
-        resolve(res);
+      this.GetNhanViens().then(res => {
+        let maxMaNhanVien = _.maxBy(res, function (o) { return o['MaNv']; }).MaNv;
+        nhanVien.MaNv = maxMaNhanVien + 1;
+        this.db.ref('/users/' + nhanVien.MaNv).set(nhanVien, (error?) => {
+          if (error) {
+            reject(new Error('firebase errors'));
+          }
+        }).then((res) => {
+          resolve(res);
+        })
       })
+
     })
   }
   PutNhanVien(nhanVien: NhanVien): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      this._db.ref('/users/' + nhanVien.MaNv).set(nhanVien, (error?) => {
+      this.db.ref('/users/' + nhanVien.MaNv).set(nhanVien, (error?) => {
         if (error) {
           reject(new Error('firebase errors'));
         }
@@ -49,7 +63,7 @@ export class QuanLyNhanVienServicePrototype implements IQuanLyNhanVienService {
   }
   DeleteNhanVien(maNv: number): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      let nhanVienBiXoa = this._db.ref('/users/' + maNv);
+      let nhanVienBiXoa = this.db.ref('/users/' + maNv);
       nhanVienBiXoa.remove().then(res => {
         resolve(res)
       })
