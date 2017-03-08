@@ -17,40 +17,36 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta content="" name="description" />
   <meta content="" name="author" />
-
-  <% if (htmlWebpackPlugin.options.metadata.ENV === 'development') { %>
+  <% if (htmlWebpackPlugin.options.metadata.ENV === 'production') { %>
     <base href="<%- htmlWebpackPlugin.options.metadata.baseUrl %>">
     <% } %>
-      <% if (htmlWebpackPlugin.options.metadata.ENV === 'production') { %>
-        <base href="<%- htmlWebpackPlugin.options.metadata.baseUrlProd %>">
-        <% } %>
-          <link rel="icon" type="image/png" href="favicon.ico">
-          <base href="<%- htmlWebpackPlugin.options.metadata.baseUrl %>">
-          <link href="assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" />
-          <link href="assets/plugins/bootstrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-          <link href="assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
-          <link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
-          <link href="assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen" />
-          <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
+
+      <link rel="icon" type="image/png" href="favicon.ico">
+      <link href="assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" />
+      <link href="assets/plugins/bootstrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+      <link href="assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+      <link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
+      <link href="assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen" />
+      <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
 
 
-          <!--<link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">-->
+      <!--<link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">-->
 
 
-          <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
-          <!--<link rel="stylesheet" href="./node_modules/select2/dist/css/select2.min.css">-->
+      <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
+      <!--<link rel="stylesheet" href="./node_modules/select2/dist/css/select2.min.css">-->
 
-          <!-- imported CSS are concatenated and added automatically -->
+      <!-- imported CSS are concatenated and added automatically -->
 
-          <script type="text/javascript">
-            window.onload = function () {
-              // fix for windows 8
-              if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
-                document.head.innerHTML +=
-                '<link rel="stylesheet" type="text/css" href="pages/css/windows.chrome.fix.css" />'
-            }
+      <script type="text/javascript">
+        window.onload = function () {
+          // fix for windows 8
+          if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
+            document.head.innerHTML +=
+            '<link rel="stylesheet" type="text/css" href="pages/css/windows.chrome.fix.css" />'
+        }
 
-          </script>
+      </script>
 </head>
 
 <body aurelia-app="main" class="fixed-header">
