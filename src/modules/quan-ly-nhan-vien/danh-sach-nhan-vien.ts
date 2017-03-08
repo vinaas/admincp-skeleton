@@ -17,7 +17,7 @@ export class DanhSachNhanVien {
   private rowCount: string;
   private api: GridApi;
   private columnApi: ColumnApi;
-  private allOfTheData: any;
+  private allOfTheData: any = [];
   private columnDefs: any[];
   constructor(private quanLyNhanVienService: QuanLyNhanVienServiceInterface, private dialogService) {
     this.columnDefs = [
@@ -59,13 +59,13 @@ export class DanhSachNhanVien {
 
   }
   activate() {
+    return this.quanLyNhanVienService.GetNhanViens().then((res) => {
+      this.allOfTheData = res;
+    })
+
   }
   onReady() {
-    console.log("allOfTheData", this.allOfTheData);
-    this.quanLyNhanVienService.GetNhanViens().then((res) => {
-      this.allOfTheData = res;
-      this.createNewDatasource();
-    })
+    this.createNewDatasource();
   }
   public onRowClicked(e) {
     if (e.event.target !== undefined) {
