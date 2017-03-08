@@ -1,9 +1,9 @@
+import { QuanLyNhanVienServiceInterface } from './QuanLyNhanVienServiceInterface';
 import { NhanVien } from './../models/nhan-vien';
-import { IQuanLyNhanVienService } from "./IQuanLyNhanVienService";
 import * as firebase from 'firebase';
 import * as _ from 'lodash';
 
-export class QuanLyNhanVienServicePrototype implements IQuanLyNhanVienService {
+export class QuanLyNhanVienServicePrototype implements QuanLyNhanVienServiceInterface {
   private db = firebase.database();
   constructor() {
   }
