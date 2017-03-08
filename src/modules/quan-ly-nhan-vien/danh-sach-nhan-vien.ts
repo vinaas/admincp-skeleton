@@ -1,8 +1,7 @@
+import { QuanLyNhanVienServiceInterface } from './services/QuanLyNhanVienServiceInterface';
 import { SaveNhanVien } from './dialogs/luu-nhan-vien';
-
 import { inject } from "aurelia-dependency-injection";
 import { QuanLyNhanVienServicePrototype } from "./services/QuanLyNhanVienService.prototype";
-import { IQuanLyNhanVienService } from "./services/IQuanLyNhanVienService";
 import { NhanVien } from "./models/nhan-vien";
 import { DialogService } from 'aurelia-dialog';
 import { GridOptions, GridApi, ColumnApi } from "ag-grid";
@@ -20,7 +19,7 @@ export class DanhSachNhanVien {
   private columnApi: ColumnApi;
   private allOfTheData: any;
   private columnDefs: any[];
-  constructor(private quanLyNhanVienService: IQuanLyNhanVienService, private dialogService) {
+  constructor(private quanLyNhanVienService: QuanLyNhanVienServiceInterface, private dialogService) {
     this.columnDefs = [
       {
         headerName: "Mã", field: "MaNv", filter: 'number'
