@@ -6,7 +6,7 @@ export class App {
   configureRouter(config: RouterConfiguration, router: Router) {
     config.title = 'Aurelia';
     config.map([
-      { route: ['', 'welcome'], name: 'welcome', moduleId: './welcome', nav: true, title: 'Welcome', auth: true },
+      { route: ['', 'dashboard'], name: 'dashboard', moduleId: 'modules/dashboard/index', nav: true, title: 'dashboard' },
       { route: 'quan-ly-nhan-vien', name: 'quan-ly-nhan-vien', moduleId: 'modules/quan-ly-nhan-vien/index', nav: true, title: 'Quản lý nhân viên' },
     ]);
 
