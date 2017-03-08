@@ -37,8 +37,8 @@ export class QuanLyNhanVienServicePrototype implements QuanLyNhanVienServiceInte
 
     return new Promise((resolve, reject) => {
       this.GetNhanViens().then(res => {
-        let maxMaNhanVien = _.maxBy(res, function (o) { return o['MaNv']; }).MaNv;
-        nhanVien.MaNv = maxMaNhanVien + 1;
+        let maxMaNhanVien: number = _.maxBy(res, function (o) { return o['MaNv']; }).MaNv;
+        nhanVien.MaNv = +maxMaNhanVien + 1;
         this.db.ref('/users/' + nhanVien.MaNv).set(nhanVien, (error?) => {
           if (error) {
             reject(new Error('firebase errors'));

@@ -59,12 +59,6 @@ export class DanhSachNhanVien {
 
   }
   activate() {
-    let nhanVien = new NhanVien();
-    nhanVien.MaNv = 124;
-    nhanVien.Email = "tungpt.hd@gmail.com";
-    nhanVien.HoTen = "Pham Tung";
-    nhanVien.ChucVu = "dev";
-    return this.quanLyNhanVienService.PostNhanVien(nhanVien);
   }
   onReady() {
     console.log("allOfTheData", this.allOfTheData);
