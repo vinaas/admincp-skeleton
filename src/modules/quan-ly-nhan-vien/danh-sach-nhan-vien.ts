@@ -32,9 +32,9 @@ export class DanhSachNhanVien {
         headerCheckboxSelectionFilteredOnly: true,
         checkboxSelection: true
       },
-      // {
-      //   headerName: "Mã", field: "MaNv", filter: 'number'
-      // },
+      {
+        headerName: "Mã", field: "MaNv", filter: 'number'
+      },
       { headerName: "Chức vụ", field: "ChucVu", suppressMenu: false, suppressSorting: true },
       { headerName: "Họ tên", field: "HoTen", filter: 'text', filterParams: { apply: true, newRowsAction: 'keep' }, suppressMenu: false, suppressSorting: true },
       { headerName: "Email", field: "Email", filter: 'text', filterParams: { newRowsAction: 'keep' }, suppressMenu: false, suppressSorting: true },
@@ -80,7 +80,7 @@ export class DanhSachNhanVien {
     }
     var dataSource = {
       getRows: (params) => {
-       
+
         this.quanLyNhanVienService.GetNhanViens().then(res => {
           this.allOfTheData = res;
           var rowsThisPage = this.allOfTheData.slice(params.startRow, params.endRow);
@@ -153,7 +153,8 @@ export class DanhSachNhanVien {
 
   //ag-grid events
   onRowDoubleClicked(e) {
-    console.log("event", );
+    let nhanVien = new NhanVien(e.data);
+    this.onActionEditClick(nhanVien);
   }
   onRowSelected(e) {
     this.selectdRows = this.gridOptions.api.getSelectedRows().map(x => new NhanVien(x));
@@ -178,6 +179,7 @@ export class DanhSachNhanVien {
           this.quanLyNhanVienService.DeleteNhanViens(maNvs)
             .then(res => {
               swal("Thành công", "Lưu thành công", "success");
+              this.selectdRows = [];
               this.onReady();
             }).catch((err) => {
 
