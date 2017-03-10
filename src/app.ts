@@ -14,6 +14,10 @@ export class App {
         route: 'quan-ly-nhan-vien', name: 'quan-ly-nhan-vien', moduleId: 'modules/quan-ly-nhan-vien/index', nav: true, title: 'Quản lý nhân viên',
         settings: { icon: 'pg-tables' }
       },
+       {
+        route: 'quan-ly-phong-ban', name: 'quan-ly-phong-ban', moduleId: 'modules/quan-ly-phong-ban/index', nav: true, title: 'Quản lý phòng ban',
+        settings: { icon: 'pg-tables' }
+      }
     ]);
 
     this.router = router;
