@@ -5,4 +5,5 @@ export interface QuanLyNhanVienServiceInterface {
   PostNhanVien(nhanVien: NhanVien): Promise<NhanVien>;
   PutNhanVien(nhanVien: NhanVien): Promise<boolean>;
   DeleteNhanVien(maNv: number): Promise<boolean>;
+  DeleteNhanViens(maNvs: number[]): Promise<boolean>;
 }

@@ -72,4 +72,16 @@ export class QuanLyNhanVienServicePrototype implements QuanLyNhanVienServiceInte
         });
     })
   }
+  DeleteNhanViens(maNvs: number[]): Promise<boolean> {
+    let tasks: Promise<boolean>[];
+    tasks = maNvs.map(x => this.DeleteNhanVien(x));
+    return new Promise((resolve, reject) => {
+      Promise.all(tasks).then(values => {
+        let result = values.reduce((previusVal, currnetVal) => previusVal && currnetVal);
+        resolve(result);
+      })
+        .catch(err => reject(err))
+    })
+
+  }
 }

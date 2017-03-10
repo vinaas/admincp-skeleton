@@ -2,6 +2,10 @@ import { QuanLyNhanVienServiceInterface } from './QuanLyNhanVienServiceInterface
 import { NhanVien } from "../models/nhan-vien";
 
 export class QuanLyNhanVienService implements QuanLyNhanVienServiceInterface {
+  DeleteNhanViens(maNvs: number[]): Promise<boolean> {
+    throw new Error('Method not implemented.');
+  }
+
   GetNhanVien(maNv: number): Promise<NhanVien> {
     throw new Error('Method not implemented.');
   }
