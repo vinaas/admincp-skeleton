@@ -11,12 +11,12 @@ export class STORAGE {
     get(key: string): string {
 
         let data = PLATFORM.global['localStorage'].getItem(key);
-        return JSON.parse(data);
+        return JSON.parse(data) || undefined;
     }
 
     set(key: string, value: string) {
         let data = JSON.stringify(value);
-        PLATFORM.global['localStorage'].setItem(key, data);
+        PLATFORM.global['localStorage'].setItem(key, data) || undefined;
     }
 
     remove(key: string) {
