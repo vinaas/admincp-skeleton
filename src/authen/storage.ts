@@ -1,7 +1,6 @@
 import {
   PLATFORM
 } from 'aurelia-pal';
-import { Config } from './config'
 export class Storage {
   constructor() {
 
