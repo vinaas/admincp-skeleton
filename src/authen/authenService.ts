@@ -1,9 +1,7 @@
+import { PLATFORM } from 'aurelia-pal';
 import { STORAGE } from './../helpers/storage';
 import { inject } from 'aurelia-framework';
-
-
 @inject(STORAGE)
-
 export class AuthenService {
     constructor(private storage: STORAGE) {
 
@@ -19,5 +17,11 @@ export class AuthenService {
         if (userInfo)
             return userInfo;
         return undefined;
+    }
+    logout() {
+        this.storage.remove(STORAGE.tokenKey);
+        this.storage.remove(STORAGE.userInfoKey);
+        PLATFORM.location.reload();
+
     }
 }
