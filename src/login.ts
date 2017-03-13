@@ -1,36 +1,27 @@
+import { STORAGE } from './helpers/storage';
 import { Aurelia, inject } from 'aurelia-framework';
 import { Router, RouterConfiguration } from 'aurelia-router';
-@inject( Aurelia, Router )
+@inject(Aurelia, Router, STORAGE)
 
-export class Login{
-	constructor(private aurelia :Aurelia, private router: Router ){
+export class Login {
+  constructor(private aurelia: Aurelia, private router: Router, private storage: STORAGE) {
 
-	};
+  };
 
-	heading = 'Login';
-	
-	email='';
-	password='';
-  login(){
-     this.router.navigate('/');
-     this.aurelia.setRoot('app')
+  heading = 'Login';
+
+  userName = '';
+  passWord = '';
+  login() {
+    // todo check authen
+    if (this.passWord.length == 4) {
+      this.storage.set(STORAGE.tokenKey, "token from res");
+    }
+    this.router.navigate('/');
+    this.aurelia.setRoot('app')
       .then(() => {
-                this.router.navigate('/');
-            });;
-    //   var creds = "grant_type=password&email=" + this.email + "&password=" + this.password;
-		// return this.auth.login(this.email, this.password)
-    //     //return this.auth.login(creds)
-		// .then(response=>{
-    //   alert("login success");
-		// 	console.log("success logged " + response);
-    //    this.aurelia.setRoot('app');
-		// })
-		// .catch(err=>{
-    //   alert("login failure")
-    //         err.json().then(function(e){
-    //         console.log("login failure : " + e.message);    
-    //         });
-			
-		// });
+        this.router.navigate('/');
+      });;
+
   }
 }

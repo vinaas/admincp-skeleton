@@ -1,5 +1,7 @@
-﻿import { Aurelia } from 'aurelia-framework';
+﻿import { STORAGE } from './helpers/storage';
+import { Aurelia } from 'aurelia-framework';
 import { LicenseManager } from "ag-grid-enterprise/main";
+import { PLATFORM } from 'aurelia-pal';
 // we want font-awesome to load as soon as possible to show the fa-spinner
 import '../styles/styles.css';
 // import 'font-awesome/css/font-awesome.css';
@@ -41,8 +43,8 @@ export async function configure(aurelia: Aurelia) {
   // aurelia.use.plugin('aurelia-html-import-template-loader')
   // LicenseManager.setLicenseKey('ag-Grid_EvaluationLicense_NotForProduction_100Devs24_April_2017__MTQ5Mjk4ODQwMDAwMA==45c3450a171d4f17e8facddb3f1162e2');
   await aurelia.start();
-
-  aurelia.setRoot('app');
+  let root = (PLATFORM.global['localStorage'][STORAGE.tokenKey] === undefined) ? 'login' : 'app';
+  aurelia.setRoot(root);
 
   // if you would like your website to work offline (Service Worker), 
   // install and enable the @easy-webpack/config-offline package in webpack.config.js and uncomment the following code:
