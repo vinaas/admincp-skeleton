@@ -16,12 +16,13 @@ export class Login {
     // todo check authen
     if (this.passWord.length == 4) {
       this.storage.set(STORAGE.tokenKey, "token from res");
+      this.router.navigate('/');
+      this.aurelia.setRoot('app')
+        .then(() => {
+          this.router.navigate('/');
+        });;
     }
-    this.router.navigate('/');
-    this.aurelia.setRoot('app')
-      .then(() => {
-        this.router.navigate('/');
-      });;
+
 
   }
 }
