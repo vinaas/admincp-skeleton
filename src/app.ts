@@ -1,8 +1,14 @@
+import { AuthenService } from './authen/authenService';
+import { inject } from 'aurelia-dependency-injection';
 import { Aurelia } from 'aurelia-framework';
 import { Router, RouterConfiguration } from 'aurelia-router';
+@inject(AuthenService)
 export class App {
   router: Router;
-
+  userInfo: any;
+  constructor(private authenSrv: AuthenService) {
+    this.userInfo = this.authenSrv.userInfo;
+  }
   configureRouter(config: RouterConfiguration, router: Router) {
     config.title = 'Aurelia';
     config.map([
