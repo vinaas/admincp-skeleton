@@ -114,7 +114,6 @@ export class DanhSachNhanVien {
 
 
   public onActionEditClick(data: NhanVien) {
-    console.log("data from mng", data);
     this.dialogService.open({ viewModel: SaveNhanVien, model: new NhanVien(data) }).then((result) => {
       if (!result.wasCancelled) {
         console.log('Save', result.output);

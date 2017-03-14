@@ -17,7 +17,6 @@ export class AuthenService {
   }
   get userInfo(): any {
     let userInfo = this.storage.get(STORAGE.userInfoKey);
-    console.log('userinfo', userInfo);
     if (userInfo)
       return userInfo;
     return undefined;
