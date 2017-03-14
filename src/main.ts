@@ -44,13 +44,10 @@ export async function configure(aurelia: Aurelia) {
   // LicenseManager.setLicenseKey('ag-Grid_EvaluationLicense_NotForProduction_100Devs24_April_2017__MTQ5Mjk4ODQwMDAwMA==45c3450a171d4f17e8facddb3f1162e2');
   await aurelia.start();
   let authed = PLATFORM.global['localStorage'][STORAGE.tokenKey];
-  console.log('authed', authed);
   if (authed !== undefined) {
-    console.log('app');
     aurelia.setRoot('app');
   }
   else {
-    console.log('login');
     aurelia.setRoot('login');
   }
 

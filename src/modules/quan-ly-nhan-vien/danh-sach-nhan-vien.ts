@@ -63,17 +63,8 @@ export class DanhSachNhanVien {
         return item.MaNv;
       }
     };
-
-    this.testLogging();
-
   }
-  testLogging() {
-    logger.debug("debug");
-    logger.info("info");
-    logger.error("error");
-    logger.warn("warn");
-    logger.info("log level", logger.level);
-  }
+ 
   activate() {
     return this.quanLyNhanVienService.GetNhanViens().then((res) => {
       this.allOfTheData = res;
