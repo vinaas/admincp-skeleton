@@ -2,6 +2,7 @@ import { AuthenService } from './authen/authenService';
 import { inject } from 'aurelia-dependency-injection';
 import { Aurelia } from 'aurelia-framework';
 import { Router, RouterConfiguration } from 'aurelia-router';
+import "./helpers/loggingSetting";
 @inject(AuthenService)
 export class App {
   router: Router;
@@ -39,3 +40,5 @@ export class App {
     document.getElementsByTagName("head")[0].appendChild(script);
   }
 }
+
+
