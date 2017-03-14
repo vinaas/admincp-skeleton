@@ -3,6 +3,8 @@ import { inject } from 'aurelia-dependency-injection';
 import { Aurelia } from 'aurelia-framework';
 import { Router, RouterConfiguration } from 'aurelia-router';
 import "./helpers/loggingSetting";
+import "./helpers/axiosInterceptor";
+
 @inject(AuthenService)
 export class App {
   router: Router;
