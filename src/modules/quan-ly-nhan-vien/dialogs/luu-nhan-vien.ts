@@ -1,3 +1,4 @@
+import { logger } from './../logger';
 import { BootstrapFormRenderer } from './../../../helpers/bootstrap-form-renderer';
 import { inject } from 'aurelia-framework';
 import { NhanVien } from './../models/nhan-vien';
@@ -22,7 +23,7 @@ export class SaveNhanVien {
   }
   nhanVienDto: NhanVien;
   activate(dto: NhanVien) {
-    console.log('dto', dto);
+    logger.info('dto', dto);
     this.nhanVienDto = dto;
   }
   save() {

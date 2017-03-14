@@ -1,3 +1,4 @@
+import { logger } from './logger';
 import { QuanLyNhanVienServiceInterface } from './services/QuanLyNhanVienServiceInterface';
 import { SaveNhanVien } from './dialogs/luu-nhan-vien';
 import { inject } from "aurelia-dependency-injection";
@@ -63,6 +64,15 @@ export class DanhSachNhanVien {
       }
     };
 
+    this.testLogging();
+
+  }
+  testLogging() {
+    logger.debug("debug");
+    logger.info("info");
+    logger.error("error");
+    logger.warn("warn");
+    logger.info("log level", logger.level);
   }
   activate() {
     return this.quanLyNhanVienService.GetNhanViens().then((res) => {
@@ -109,14 +119,14 @@ export class DanhSachNhanVien {
     }
   }
   public onActionViewClick(data: NhanVien) {
-    console.log("View action clicked", data);
+    logger.info("View action clicked", data);
   }
 
 
   public onActionEditClick(data: NhanVien) {
     this.dialogService.open({ viewModel: SaveNhanVien, model: new NhanVien(data) }).then((result) => {
       if (!result.wasCancelled) {
-        console.log('Save', result.output);
+        logger.info('Save', result.output);
         let editedNhanVien = result.output;
         this.quanLyNhanVienService.PutNhanVien(editedNhanVien).then((res) => {
           swal("Thành công", "Lưu thành công", "success");
@@ -126,7 +136,7 @@ export class DanhSachNhanVien {
           swal("Không thành công", `${err}`, "error")
         });
       } else {
-        console.log('Cancel');
+        logger.info("Cancel");
       }
     });
   }
@@ -134,7 +144,7 @@ export class DanhSachNhanVien {
   themMoiNhanVien() {
     this.dialogService.open({ viewModel: SaveNhanVien, model: new NhanVien() }).then((result) => {
       if (!result.wasCancelled) {
-        console.log('Save', result.output);
+        logger.info('Save', result.output);
         let themMoiNhanVien: NhanVien = result.output;
         this.quanLyNhanVienService.PostNhanVien(themMoiNhanVien)
           .then((res) => {
@@ -145,7 +155,7 @@ export class DanhSachNhanVien {
             swal("Không thành công", `${err}`, "error")
           });
       } else {
-        console.log('Cancel');
+        logger.info('Cancel');
       }
     });
   }
