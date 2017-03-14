@@ -159,6 +159,9 @@ export class DanhSachNhanVien {
   onRowSelected(e) {
     this.selectdRows = this.gridOptions.api.getSelectedRows().map(x => new NhanVien(x));
   }
+  deselectAll() {
+    this.gridOptions.api.deselectAll();
+  }
 
   // view events
   deleteSelected() {
@@ -191,4 +194,5 @@ export class DanhSachNhanVien {
       })
 
   }
+
 }
