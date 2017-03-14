@@ -19,9 +19,10 @@
     </div>
   </div>
   <hr>
+  <h3><div id="selectedFile"></div></h3>
   <div style="width: 100%; height: 350px;">
     <ag-grid-aurelia #agGrid class="ag-fresh" grid-options.bind="gridOptions" column-defs.bind="columnDefs" grid-ready.call="onReady()"
-      row-clicked.call="onRowClicked($event)" row-double-clicked.call="onRowDoubleClicked($event)" row-selected.call="onRowSelected($event)">
+      row-clicked.call="onRowClicked($event)">
 
     </ag-grid-aurelia>
   </div>
