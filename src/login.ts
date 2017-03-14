@@ -1,11 +1,12 @@
+import { AuthenService } from './authen/authenService';
 import swal from 'sweetalert';
-import { STORAGE } from './helpers/storage';
+// import { STORAGE } from './helpers/storage';
 import { Aurelia, inject } from 'aurelia-framework';
 import { Router, RouterConfiguration } from 'aurelia-router';
-@inject(Aurelia, Router, STORAGE)
+@inject(Aurelia, Router, AuthenService)
 
 export class Login {
-  constructor(private aurelia: Aurelia, private router: Router, private storage: STORAGE) {
+  constructor(private aurelia: Aurelia, private router: Router, private authSrv: AuthenService) {
 
   };
 
@@ -15,17 +16,15 @@ export class Login {
   passWord = '';
   login() {
     // todo check authen
+
     if (this.passWord.length == 4) {
       swal({ title: 'Đăng nhập', text: 'Đăng nhập thành công', type: 'success', timer: 1000, showConfirmButton: false });
-      this.storage.set(STORAGE.tokenKey, "token from res");
-      this.storage.set(STORAGE.userInfoKey, { userName: "TungPT", image: "https://dummyimage.com/60x60/000/ff008c", roles: ['dev'] })
-      this.router.navigate('/');
-      this.aurelia.setRoot('app')
-        .then(() => {
-          this.router.navigate('/');
-        });
+      this.authSrv.login({ userName: 'tungpt', passWord: 'passs' }).then(result => {
+        
+      })
     }
-
-
+    else{
+      swal({title:"Lỗi", text:"Nhập mật khẩu 4 kí tự để đăng nhập", type:"error", timer:3000, showConfirmButton :false })
+    }
   }
 }
