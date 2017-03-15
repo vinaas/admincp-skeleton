@@ -25,7 +25,7 @@ const ENV: 'development' | 'production' | 'test' = process.env.NODE_ENV && proce
 
 // basic configuration:
 const title = 'AdminCP Skeleton';
-const baseUrl = 'https://easywebhub.github.io/admincp-skeleton/';
+const baseUrl = '';
 const rootDir = path.resolve();
 const srcDir = path.resolve('src');
 const outDir = path.resolve('dist');
