@@ -1,17 +1,41 @@
 <template>
-  <section class="au-animate">
-    <h2>${heading}</h2>
-    <div>
-      <div class="col-md-2">
-        <ul class="well nav nav-pills nav-stacked">
-          <li repeat.for="row of router.navigation" class="${row.isActive ? 'active' : ''}">
-            <a href.bind="row.href">${row.title}</a>
+
+  <div class="bar">
+    <div class="pull-right">
+      <a href="#" class="text-black padding-10 visible-xs-inline visible-sm-inline pull-right m-t-10 m-b-10 m-r-10 on" data-pages="horizontal-menu-toggle">
+        <i class=" pg-close_line"></i>
+      </a>
+    </div>
+    <div class="bar-inner">
+      <ul>
+        <li repeat.for="row of router.navigation" class="${row.isActive ? 'active' : ''}">
+          <a href.bind="row.href">
+            <span class="">${row.title}</span>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- START CONTAINER FLUID -->
+  <div class="container-fluid container-fixed-lg">
+    <div class="inner">
+        <!-- START BREADCRUMB -->
+        <ul class="breadcrumb">
+          <li>
+            <p>${router.parent.currentInstruction.config.title}</p>
+          </li>
+          <li><a  class="active">${router.currentInstruction.config.title}</a>
           </li>
         </ul>
-      </div>
-      <div class="col-md-10" style="padding: 0">
-        <router-view></router-view>
-      </div>
-    </div>
-  </section>
+    <!-- BEGIN PlACE PAGE CONTENT HERE -->
+    <router-view></router-view>
+
+    <!-- END PLACE PAGE CONTENT HERE -->
+  </div>
+  <!-- END CONTAINER FLUID -->
+  </div>
+  <!-- END PAGE CONTENT -->
 </template>
