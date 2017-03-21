@@ -23,7 +23,7 @@
         <br>
 
         <li repeat.for="row of router.navigation" class="${row.isActive ? 'active' : ''}">
-          <a href.bind="row.href" class="detailed">
+          <a href.bind="row.href" class="">
             <span class="title">${row.title}</span>
           </a>
           <span class="icon-thumbnail "><i class="${row.settings.icon}"></i></span>

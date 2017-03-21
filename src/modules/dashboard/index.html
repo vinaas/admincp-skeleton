@@ -1,37 +1,88 @@
 <template>
   <div class="container-fluid container-fixed-lg">
-    <div class="inner">
-      <h2>Dashboard</h2>
-      <div class="row placeholders">
-        <div class="col-xs-6 col-sm-3 placeholder">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive"
-            alt="Generic placeholder thumbnail">
-          <h4>Label</h4>
-          <span class="text-muted">Something else</span>
+    <!-- BEGIN PlACE PAGE CONTENT HERE -->
+    <!-- END PLACE PAGE CONTENT HERE -->
+    <br>
+    <div class="row">
+        <div class="col-sm-7">
+
+            <h3 class="page-title" >Quản lý hóa đơn</h3>
+
         </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive"
-            alt="Generic placeholder thumbnail">
-          <h4>Label</h4>
-          <span class="text-muted">Something else</span>
+
+        <div class="col-sm-5">
+            <div class="text-right">
+                <button class="btn btn-primary btn-cons m-b-10" type="button"><i class="pg-form"></i> Tạo mới
+                </button>
+
+
+                <button class="btn btn-default btn-cons m-b-10" type="button"><i class="fa fa-file-excel-o"></i> Xuất báo cáo
+                </button>
+
+            </div>
         </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive"
-            alt="Generic placeholder thumbnail">
-          <h4>Label</h4>
-          <span class="text-muted">Something else</span>
-        </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive"
-            alt="Generic placeholder thumbnail">
-          <h4>Label</h4>
-          <span class="text-muted">Something else</span>
-        </div>
-      </div>
-      
+
     </div>
-    <!-- END CONTAINER FLUID -->
-  </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div class="panel panel-default">
+                <!--<div class="panel-heading">-->
+                    <!--<div class="panel-title">-->
+                        <!--Option #two-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="panel-body">
+                    <h5>
+                       Tìm kiếm
+                    </h5>
+                    <form role="form" lpformnum="2" class="form-filter">
+                        <div class="form-group">
+                            <label>Your name</label>
+                            <span class="help">e.g. </span>
+                            <input type="email" class="form-control" >
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <span class="help">e.g. "Mona "</span>
+                            <input type="password" class="form-control" required="" >
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <span class="help">e.g. "some"</span>
+                            <input type="email" class="form-control" placeholder="ex: some@example.com" required="">
+                        </div>
+                        <div class="form-group">
+                            <label>Placeholder</label>
+                            <span class="help">e.g. </span>
+                            <input type="email" class="form-control" placeholder="ex: some@example.com" required="">
+                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<label>Disabled</label>-->
+                            <!--<span class="help">e.g. </span>-->
+                            <!--<input type="email" class="form-control" value="You can put anything here" disabled="">-->
+                        <!--</div>-->
+
+                        <div class="form-group">
+
+                            <button class="btn btn-primary btn-cons m-t-25" type="button"><i class="fa fa-search"></i> Tìm kiếm
+                            </button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+</div>
+
   <!-- END PAGE CONTENT -->
 
 </template>
