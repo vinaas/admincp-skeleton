@@ -99,7 +99,7 @@ let config = generateConfig(
   css({ filename: 'styles.css', allChunks: true, sourceMap: false }),
   fontAndImages(),
   globalBluebird(),
-  globalJquery(),
+  // globalJquery(),
   generateIndexHtml({minify: ENV === 'production'}),
 
   ...(ENV === 'production' || ENV === 'development' ? [
