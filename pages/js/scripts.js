@@ -339,15 +339,17 @@
     * @requires select2.js version 4.0.x
     */
     Pages.prototype.initSelect2Plugin = function(context) {
-        $.fn.select2 && $('[data-init-plugin="select2"]', context).each(function() {
-            $(this).select2({
-                minimumResultsForSearch: ($(this).attr('data-disable-search') == 'true' ? -1 : 1)
-            }).on('select2:open', function() {
-                $.fn.scrollbar && $('.select2-results__options').scrollbar({
-                    ignoreMobile: false
-                })
-            });
-        });
+        // $.fn.select2 && $('[data-init-plugin="select2"]', context).each(function() {
+        //     $(this).select2({
+        //         minimumResultsForSearch: ($(this).attr('data-disable-search') == 'true' ? -1 : 1)
+        //     }).on('select2:open', function() {
+        //         $.fn.scrollbar && $('.select2-results__options').scrollbar({
+        //             ignoreMobile: false
+        //         })
+        //     }).on('select2:select', function(event){
+        //         event.currentTarget.dispatchEvent(new Event("change"));
+        //     });
+        // });
     }
     /** @function initScrollBarPlugin
     * @description Initialize Global Scroller

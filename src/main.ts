@@ -30,6 +30,7 @@ export async function configure(aurelia: Aurelia) {
       config.settings.enableEscClose = true;
     })
     .feature('resources')
+    .feature('components')
     // 	baseConfig.configure(config);
     // })
 
