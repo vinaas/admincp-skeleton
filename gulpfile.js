@@ -9,7 +9,9 @@ gulp.copy = function (src, dest) {
 };
 
 gulp.task('deploy', function (callback) {
-  runSequence(['copy-assets', 'copy-pages', 'copy-images', 'copy-favicon','copy-cname'],
+  runSequence(['copy-assets', 'copy-pages', 'copy-images', 'copy-favicon'
+  // ,'copy-cname'
+  ],
     'push-to-gh-pages',
     callback);
 });
@@ -34,9 +36,9 @@ gulp.task('copy-favicon', function () {
   return gulp.src(['favicon.ico']).pipe(gulp.dest('dist/'));
 
 });
-gulp.task('copy-cname', function () {
-  return gulp.src(['CNAME']).pipe(gulp.dest('dist/'));
-})
+// gulp.task('copy-cname', function () {
+//   return gulp.src(['CNAME']).pipe(gulp.dest('dist/'));
+// })
 gulp.task('push-to-gh-pages', function () {
   return gulp.src('./dist/**/*')
     .pipe(ghPages({
