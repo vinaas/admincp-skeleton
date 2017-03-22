@@ -42,6 +42,6 @@ gulp.task('copy-favicon', function () {
 gulp.task('push-to-gh-pages', function () {
   return gulp.src('./dist/**/*')
     .pipe(ghPages({
-      remoteUrl: 'https://github.com/vinaas/kieu-hoi-publish.git'
+      // remoteUrl: 'https://github.com/vinaas/kieu-hoi-publish.git'
     }));
 });
