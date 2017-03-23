@@ -21,7 +21,8 @@ export class DanhSachNhanVien {
   private allOfTheData: any = [];
   private columnDefs: any[];
 
-  private selectdRows: NhanVien[] = [];
+  private selectedList: NhanVien[] = [];
+  private selectedItem: NhanVien;
 
 
   constructor(private quanLyNhanVienService: QuanLyNhanVienServiceInterface, private dialogService) {
@@ -64,7 +65,7 @@ export class DanhSachNhanVien {
       }
     };
   }
- 
+
   activate() {
     return this.quanLyNhanVienService.GetNhanViens().then((res) => {
       this.allOfTheData = res;
@@ -99,13 +100,14 @@ export class DanhSachNhanVien {
 
   }
   public onRowClicked(e) {
+    this.selectedItem = new NhanVien(e.data);
     if (e.event.target !== undefined) {
       let data = e.data;
       let actionType = e.event.target.getAttribute("data-action-type");
 
       switch (actionType) {
         case "edit":
-          return this.onActionEditClick(data);
+          return this.onActionEditClick();
       }
     }
   }
@@ -114,8 +116,8 @@ export class DanhSachNhanVien {
   }
 
 
-  public onActionEditClick(data: NhanVien) {
-    this.dialogService.open({ viewModel: SaveNhanVien, model: new NhanVien(data) }).then((result) => {
+  public onActionEditClick() {
+    this.dialogService.open({ viewModel: SaveNhanVien, model: this.selectedItem }).then((result) => {
       if (!result.wasCancelled) {
         logger.info('Save', result.output);
         let editedNhanVien = result.output;
@@ -157,7 +159,7 @@ export class DanhSachNhanVien {
     this.onActionEditClick(nhanVien);
   }
   onRowSelected(e) {
-    this.selectdRows = this.gridOptions.api.getSelectedRows().map(x => new NhanVien(x));
+    this.selectedList = this.gridOptions.api.getSelectedRows().map(x => new NhanVien(x));
   }
   deselectAll() {
     this.gridOptions.api.deselectAll();
@@ -165,7 +167,7 @@ export class DanhSachNhanVien {
 
   // view events
   deleteSelected() {
-    let maNvs = this.selectdRows.map(x => x.MaNv);
+    let maNvs = this.selectedList.map(x => x.MaNv);
     swal({
       title: "Bạn có chắc xóa không",
       text: "Bạn sẽ không khôi phục lại được nhân viên nếu đã bị xóa",
@@ -182,7 +184,7 @@ export class DanhSachNhanVien {
           this.quanLyNhanVienService.DeleteNhanViens(maNvs)
             .then(res => {
               swal("Thành công", "Lưu thành công", "success");
-              this.selectdRows = [];
+              this.selectedList = [];
               this.onReady();
             }).catch((err) => {
 

@@ -6,7 +6,7 @@ import { PLATFORM } from 'aurelia-pal';
 import '../styles/styles.css';
 import 'font-awesome/css/font-awesome.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap';
+// import 'bootstrap';
 import "select2/dist/css/select2.min.css";
 import "sweetalert";
 import "sweetalert/dist/sweetalert.css";
