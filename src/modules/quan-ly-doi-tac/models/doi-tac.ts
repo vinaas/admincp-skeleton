@@ -5,6 +5,7 @@ export class DoiTac {
     constructor(doiTac: any = { Id: 0 }) {
         this.Id = doiTac.Id;
         this.Ten = doiTac.Ten;
+        this.DiaChi = doiTac.DiaChi;    
     }
 }
 
