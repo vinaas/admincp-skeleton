@@ -14,8 +14,8 @@
 
       <form submit.delegate="save()">
         <div class="form-group">
-          <label>Ten</label>
-          <input type="text" class="form-control" value.bind="doiTacDto.Ten & validate">
+          <label>Tên</label>
+          <input type="text" attach-focus="true" class="form-control" value.bind="doiTacDto.Ten & validateOnChange">
         </div>
         <div class="form-group">
           <label>Địa chỉ</label>
