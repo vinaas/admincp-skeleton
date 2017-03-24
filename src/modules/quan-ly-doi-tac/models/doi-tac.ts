@@ -3,9 +3,8 @@ export class DoiTac {
     Ten: String;
     DiaChi: String;
     constructor(doiTac: any = { Id: 0 }) {
-        this.Id = doiTac.MaNv;
-        this.Ten = doiTac.ChucVu;
-        this.DiaChi = doiTac.DiaChi;
+        this.Id = doiTac.Id;
+        this.Ten = doiTac.Ten;
     }
 }
 
