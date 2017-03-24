@@ -113,7 +113,7 @@ export class DanhSachNhanVien {
   }
   public onActionViewClick(data: NhanVien) {
     logger.info("View action clicked", data);
-  }
+}
 
 
   public onActionEditClick() {
@@ -156,7 +156,7 @@ export class DanhSachNhanVien {
   //ag-grid events
   onRowDoubleClicked(e) {
     let nhanVien = new NhanVien(e.data);
-    this.onActionEditClick(nhanVien);
+    this.onActionEditClick();
   }
   onRowSelected(e) {
     this.selectedList = this.gridOptions.api.getSelectedRows().map(x => new NhanVien(x));
