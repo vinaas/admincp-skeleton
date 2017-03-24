@@ -1,3 +1,38 @@
 <template>
-Your Template Here
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <input type="button" class="btn btn-primary" value="Thêm mới" click.delegate="themMoiDoiTac()">
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
+      <div class="btn-group">
+        <button disabled.bind="selectedItems.length===0" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+    Đã chọn (${selectedItems.length}) <span class="caret"></span>
+  </button>
+        <ul class="dropdown-menu">
+          <li click.delegate="deleteSelected()"><a href="javascript:void(0)">Xóa</a></li>
+          <li click.delegate="deselectAll()"><a href="javascript:void(0)">Bỏ chọn</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <form class="form-inline" submit.delegate="search()">
+    <div class="form-group">
+      <label for="Ten">Tên</label>
+      <input type="Ten" class="form-control" id="Ten" value.bind="filter.Ten">
+    </div>
+    <div class="form-group">
+      <label for="diaChi">Địa Chỉ</label>
+      <input type="text" class="form-control" id="diaChi" value.bind="filter.DiaChi">
+    </div>
+    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+  </form>
+  <hr>
+  <div style="width: 100%; height: 350px;">
+    <ag-grid-aurelia #agGrid class="ag-fresh" grid-options.bind="gridOptions" column-defs.bind="columnDefs" grid-ready.call="onReady()"
+      row-clicked.call="onRowClicked($event)" row-double-clicked.call="onRowDoubleClicked($event)" row-selected.call="onRowSelected($event)">
+
+    </ag-grid-aurelia>
+  </div>
 </template>
