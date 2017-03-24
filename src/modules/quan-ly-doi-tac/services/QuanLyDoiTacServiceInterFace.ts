@@ -6,4 +6,5 @@ export interface QuanLyDoiTacServiceInterface {
   PutDoiTac(DoiTac: DoiTac): Promise<boolean>;
   DeleteDoiTac(maNv: number): Promise<boolean>;
   DeleteDoiTacs(maNvs: number[]): Promise<boolean>;
+  GetDoiTacsByFilter(filter: any): Promise<Array<DoiTac>>;
 }

@@ -1,7 +1,11 @@
 import { DoiTac } from './../models/doi-tac';
 import { QuanLyDoiTacServiceInterface } from './QuanLyDoiTacServiceInterFace';
-export class QuanLyDoiTacServiceProduction implements QuanLyDoiTacServiceInterface {    
-GetDoiTac(maNv: number): Promise<DoiTac> {
+export class QuanLyDoiTacServiceProduction implements QuanLyDoiTacServiceInterface {
+    GetDoiTacsByFilter(filter: any):  Promise<Array<DoiTac>> {
+        throw new Error('Method not implemented.');
+    }
+
+    GetDoiTac(maNv: number): Promise<DoiTac> {
         throw new Error('Method not implemented.');
     }
     GetDoiTacs(): Promise<DoiTac[]> {
