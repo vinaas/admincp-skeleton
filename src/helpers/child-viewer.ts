@@ -1,4 +1,4 @@
-export const childView: string = `<template>
+export const childViewer: string = `<template>
 
   <div class="bar">
     <div class="pull-right">

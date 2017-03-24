@@ -1,8 +1,8 @@
-import { childView } from './../../helpers/child-view';
+import { childViewer } from './../../helpers/child-viewer';
 import { inject } from 'aurelia-dependency-injection';
 import { Router, RouterConfiguration } from 'aurelia-router';
 import { inlineView } from "aurelia-templating";
-@inlineView(childView)
+@inlineView(childViewer)
 export class QuanLyDoiTac {
     router: Router;
     heading = 'Quản lý đổi tác';

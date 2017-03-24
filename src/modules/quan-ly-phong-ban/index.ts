@@ -1,8 +1,8 @@
+import { childViewer } from './../../helpers/child-viewer';
 import { inlineView } from 'aurelia-templating';
-import { childView } from './../../helpers/child-view';
 import { inject } from 'aurelia-dependency-injection';
 import { Router, RouterConfiguration } from 'aurelia-router';
-@inlineView(childView)
+@inlineView(childViewer)
 export class QuanLyPhongBan {
   router: Router;
   heading = 'Quản lý phòng ban';
