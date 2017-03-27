@@ -49,7 +49,7 @@ export class QuanLyDoiTac {
 import { getLogger } from 'aurelia-logging';
 export const logger = getLogger('quan-ly-doi-tac');
 ```
-3. Định nghĩa models, validation (tham khảo [aurelia-validation](https://github.com/aurelia/validation)) rules cho model tương ứng nếu có [commit tại đây](https://github.com/easywebhub/admincp-skeleton/commit/29d968a5209522585a5f7154694c94264014e3be):
+3. Định nghĩa models, validation rules (tham khảo [aurelia-validation](https://github.com/aurelia/validation))  cho model tương ứng nếu có [commit tại đây](https://github.com/easywebhub/admincp-skeleton/commit/29d968a5209522585a5f7154694c94264014e3be):
 - modules/doi-tac.ts
 ```javascript
 export class DoiTac {
@@ -84,8 +84,8 @@ export interface QuanLyDoiTacServiceInterface {
   GetDoiTacsByFilter(filter: any): Promise<Array<DoiTac>>;
 }
 ```
-- [quan-ly-doi-tac-service-prototype.ts](https://raw.githubusercontent.com/easywebhub/admincp-skeleton/06351d3e8f28f8d5b69b72e44dd36dccae285ced/src/modules/quan-ly-doi-tac/services/QuanLyDoiTacServicePrototype.ts)
-- [quan-ly-doi-tac-service-production.ts](https://raw.githubusercontent.com/easywebhub/admincp-skeleton/06351d3e8f28f8d5b69b72e44dd36dccae285ced/src/modules/quan-ly-doi-tac/services/QuanLyDoiTacServiceProduction.ts)
+- [quan-ly-doi-tac-service-prototype.ts](https://github.com/easywebhub/admincp-skeleton/blob/master/src/modules/quan-ly-doi-tac/services/QuanLyDoiTacServicePrototype.ts)
+- [quan-ly-doi-tac-service-production.ts](https://github.com/easywebhub/admincp-skeleton/blob/master/src/modules/quan-ly-doi-tac/services/QuanLyDoiTacServiceProduction.ts)
 5. Thêm dialogs (tham khảo [aurelia-dialog](https://github.com/aurelia/dialog)) [commit tại đây](https://github.com/easywebhub/admincp-skeleton/commit/6d60a11e60d3596d26da7d56b3a78ba52d5e21b2)
 - dialogs/luu-doi-tac.html
 ```html
