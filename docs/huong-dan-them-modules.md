@@ -1,166 +1,410 @@
 # Hướng dẫn thêm một module mới
 
-### Thêm 1 module
-1. Tạo 1 folder `ten-module` trong thư mục `/src/modules/`
-1. Tạo các thành phần giao diện( cặp view , view model) cho module , tham khảo [Creating Components](http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/creating-components/1)
-  - view `index.html`
+### Thêm 1 module "Quản lý đối tác"
 
-    ```html    
-      <template>
-      <section class="au-animate">
-        <h2>${heading}</h2>
-        <div>
-          <div class="col-md-2">
-            <ul class="well nav nav-pills nav-stacked">
-              <li repeat.for="row of router.navigation" class="${row.isActive ? 'active' : ''}">
-                <a href.bind="row.href">${row.title}</a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-md-10" style="padding: 0">
-            <router-view></router-view>
-          </div>
+Cấu trúc thư mục:
+```html
+/src
+  |__modules
+  |  |__quan-ly-doi-tac
+  |     |__dialogs
+  |     |  |__luu-nhan-vien.html
+  |     |  |__luu-nhan-vien.ts
+  |     |__models
+  |     |  |__doi-tac.ts
+  |     |__services
+  |     |  |__quan-ly-doi-tac-service-interface.ts
+  |     |  |__quan-ly-doi-tac-service-prototype.ts
+  |     |  |__quan-ly-doi-tac-service-production.ts
+  |     |__danh-sach-doi-tac.html
+  |     |__danh-sach-doi-tac.ts
+  |     |__ index.ts // định nghĩa child router (module level)
+  |     |__logger.ts
+  |__app.ts // định nghĩa root router(app level)
+
+  ```
+
+1. Tạo 1 folder `quan-ly-doi-tac` trong thư mục `/src/modules/`
+2. Tạo router, logger cho module `quan-ly-doi-tac` [commit tại đây](https://github.com/easywebhub/admincp-skeleton/commit/433b0f0264b908cf95cc55f4cd85a94698a3b3f7)
+- quan-ly-doi-tac/index.ts (router)
+```javascript
+import { childViewer } from './../../helpers/child-viewer';
+import { inject } from 'aurelia-dependency-injection';
+import { Router, RouterConfiguration } from 'aurelia-router';
+import { inlineView } from "aurelia-templating";
+@inlineView(childViewer)
+export class QuanLyDoiTac {
+    router: Router;
+    heading = 'Quản lý đổi tác';
+    configureRouter(config: RouterConfiguration, router: Router) {
+        config.map([
+            { route: ['', 'danh-sach-doi-tac'], name: 'danh-sach-doi-tac', moduleId: './danh-sach-doi-tac', nav: true, title: 'Danh sách đổi tác' }]);
+        this.router = router;
+    }
+}
+```
+- quan-ly-doi-tac/logger.ts (logger)
+```javascript
+import { getLogger } from 'aurelia-logging';
+export const logger = getLogger('quan-ly-doi-tac');
+```
+3. Định nghĩa models, validation (tham khảo [aurelia-validation](https://github.com/aurelia/validation)) rules cho model tương ứng nếu có [commit tại đây](https://github.com/easywebhub/admincp-skeleton/commit/29d968a5209522585a5f7154694c94264014e3be):
+- modules/doi-tac.ts
+```javascript
+export class DoiTac {
+    Id: number;
+    Ten: String;
+    DiaChi: String;
+    constructor(doiTac: any = { Id: 0 }) {
+        this.Id = doiTac.Id;
+        this.Ten = doiTac.Ten;
+        this.DiaChi = doiTac.DiaChi;    
+    }
+}
+
+// define validation
+import { ValidationRules } from 'aurelia-validation';
+ValidationRules
+    .ensure((x: DoiTac) => x.Ten).required()
+    .ensure(x => x.DiaChi).required()
+    .on(DoiTac);
+```
+4. Định nghĩa các services (remote data) cho modules [commit tại đây](https://github.com/easywebhub/admincp-skeleton/commit/06351d3e8f28f8d5b69b72e44dd36dccae285ced)
+- quan-ly-doi-tac-service-interface.ts
+```javascript
+import { DoiTac } from "../models/doi-tac";
+export interface QuanLyDoiTacServiceInterface {
+  GetDoiTac(maNv: number): Promise<DoiTac>;
+  GetDoiTacs(): Promise<Array<DoiTac>>;
+  PostDoiTac(DoiTac: DoiTac): Promise<DoiTac>;
+  PutDoiTac(DoiTac: DoiTac): Promise<boolean>;
+  DeleteDoiTac(maNv: number): Promise<boolean>;
+  DeleteDoiTacs(maNvs: number[]): Promise<boolean>;
+  GetDoiTacsByFilter(filter: any): Promise<Array<DoiTac>>;
+}
+```
+- [quan-ly-doi-tac-service-prototype.ts](https://raw.githubusercontent.com/easywebhub/admincp-skeleton/06351d3e8f28f8d5b69b72e44dd36dccae285ced/src/modules/quan-ly-doi-tac/services/QuanLyDoiTacServicePrototype.ts)
+- [quan-ly-doi-tac-service-production.ts](https://raw.githubusercontent.com/easywebhub/admincp-skeleton/06351d3e8f28f8d5b69b72e44dd36dccae285ced/src/modules/quan-ly-doi-tac/services/QuanLyDoiTacServiceProduction.ts)
+5. Thêm dialogs (tham khảo [aurelia-dialog](https://github.com/aurelia/dialog)) [commit tại đây](https://github.com/easywebhub/admincp-skeleton/commit/6d60a11e60d3596d26da7d56b3a78ba52d5e21b2)
+- dialogs/luu-doi-tac.html
+```html
+<template>
+  <style>
+    ai-dialog-overlay.active {
+      background-color: black;
+      opacity: .5;
+    }
+  </style>
+  <ai-dialog>
+    <ai-dialog-header>
+      <h2>${getTieuDe}</h2>
+    </ai-dialog-header>
+    <ai-dialog-body>
+
+      <form submit.delegate="save()">
+        <div class="form-group">
+          <label>Tên</label>
+          <input type="text" attach-focus="true" class="form-control" value.bind="doiTacDto.Ten & validateOnChange">
         </div>
-      </section>
-    </template>
-    ```
-  - viewmodel `index.html`
+        <div class="form-group">
+          <label>Địa chỉ</label>
+          <input type="text" class="form-control" value.bind="doiTacDto.DiaChi & validate">
+        </div>
 
-    ```javascript
-      import { inject } from 'aurelia-dependency-injection';
-      import { Router, RouterConfiguration } from 'aurelia-router';
-      export class QuanLyNhanVien {
-      router: Router;
-      heading = 'Quản lý nhân viên';
-      configureRouter(config: RouterConfiguration, router: Router) {
-          config.map([
-              { route: ['', 'danh-sach-nhan-vien'], name: 'danh-sach-nhan-vien', moduleId: './danh-sach-nhan-vien', nav: true, title: 'Danh sách nhân viên' }]);
-          this.router = router;
+        <button class="btn btn-primary" type="submit">Lưu</button>
+        <button class="btn btn-warning" click.trigger="dialogcontroller.cancel()">Hủy</button>
+      </form>
+    </ai-dialog-body>
+  </ai-dialog>
+</template>
+```
+- dialogs/luu-doi-tac.ts
+```javascript
+import { DoiTac } from './../models/doi-tac';
+import { logger } from './../logger';
+import { BootstrapFormRenderer } from './../../../helpers/bootstrap-form-renderer';
+import { inject } from 'aurelia-framework';
+import { DialogController } from "aurelia-dialog";
+import { ValidationControllerFactory, ValidationController } from "aurelia-validation";
+@inject(DialogController, ValidationControllerFactory)
+
+export class SaveDoiTac {
+    validationcontroller: ValidationController;
+
+    doiTacDto: DoiTac;
+    constructor(private dialogcontroller: DialogController, private controllerFactory) {
+        this.validationcontroller = controllerFactory.createForCurrentScope();
+        this.validationcontroller.addRenderer(new BootstrapFormRenderer());
+    }
+
+    get getTieuDe() {
+        switch (this.doiTacDto.Id) {
+            case 0:
+                return "Thêm mới";
+
+            default:
+                return "Cập nhật";
         }
-      }
-    ```
-1. Định nghĩa các model liên quan đến module và [validation](http://aurelia.io/hub.html#/doc/article/aurelia/validation/latest/validation-basics) rules trong thư mục `src/modules/ten-module/models`
-  - nhan-vien.ts
-  ```javascript
-        export class NhanVien {
-          public MaNv: number;
-          HoTen: String;
-          ChucVu: String;
-          Email: String;
-          constructor(nhanVien: any = { MaNv: 0 }) {
-              this.MaNv = nhanVien.MaNv;
-              this.ChucVu = nhanVien.ChucVu;
-              this.Email = nhanVien.Email;
-              this.HoTen = nhanVien.HoTen;
+    }
+    activate(dto: DoiTac) {
+        logger.info('dto', dto);
+        this.doiTacDto = dto;
+    }
+    save() {
+        this.validationcontroller.validate().then((result) => {
+            if (result.valid) {
+                this.dialogcontroller.ok(this.doiTacDto);
+            }
+        })
 
-          }
-      }
+    }
 
-      // define validation model
-      import { ValidationRules } from 'aurelia-validation';
-      ValidationRules
-          .ensure((x: NhanVien) => x.HoTen).required()
-          .ensure(x => x.ChucVu).required()
-          .ensure(x => x.Email).required().email()
-          .on(NhanVien);
+}
+```
+6. Thêm component ([tham khảo reating Components](http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/creating-components/1)) danh-sach-nhan-vien [commit tại đây](https://github.com/easywebhub/admincp-skeleton/commit/f40d0abd74b6a80085ee0e3caece2a47102cd51b) 
+- danh-sach-doi-tac.html
+```html
+<template>
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <input type="button" class="btn btn-primary" value="Thêm mới" click.delegate="themMoiDoiTac()">
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
+      <div class="btn-group">
+        <button disabled.bind="selectedItems.length===0" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+    Đã chọn (${selectedItems.length}) <span class="caret"></span>
+  </button>
+        <ul class="dropdown-menu">
+          <li click.delegate="deleteSelected()"><a href="javascript:void(0)">Xóa</a></li>
+          <li click.delegate="deselectAll()"><a href="javascript:void(0)">Bỏ chọn</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <form class="form-inline" submit.delegate="search()">
+    <div class="form-group">
+      <label for="Ten">Tên</label>
+      <input type="Ten" class="form-control" id="Ten" value.bind="filter.Ten">
+    </div>
+    <div class="form-group">
+      <label for="diaChi">Địa Chỉ</label>
+      <input type="text" class="form-control" id="diaChi" value.bind="filter.DiaChi">
+    </div>
+    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+  </form>
+  <hr>
+  <div style="width: 100%; height: 350px;">
+    <ag-grid-aurelia #agGrid class="ag-fresh" grid-options.bind="gridOptions" column-defs.bind="columnDefs" grid-ready.call="onReady()"
+      row-clicked.call="onRowClicked($event)" row-double-clicked.call="onRowDoubleClicked($event)" row-selected.call="onRowSelected($event)">
 
-  ```
-1. Định nghĩa các CRUD services cho module trong thư mục `src/modules/ten-module/services`
-  - IQuanLyNhanVienService.ts
-  ```javascript
-      import { NhanVien } from "../models/nhan-vien";
-      export interface IQuanLyNhanVienService {
-      GetNhanVien(maNv: number): Promise<NhanVien>;
-      GetNhanViens(): Promise<Array<NhanVien>>;
-      PostNhanVien(nhanVien: NhanVien): Promise<NhanVien>;
-      PutNhanVien(nhanVien: NhanVien): Promise<boolean>;
-      DeleteNhanVien(maNv: number): Promise<boolean>;
-      }
-  ```
-  - QuanLyNhanVienService.prototype.ts  //fake data, using firebase implement CRUD
-  - QuanLyNhanVienService.ts // implement restful apis
-1. Định nghĩa [dialogs](https://github.com/aurelia/dialog) cho mudule trong thư mục `src/modules/ten-module/dialogs`
- - Để chia nhỏ các chức năng quản lý cho module như xem, thêm mới, xóa, cập nhật.
- - luu-nhan-vien.html
-  ```html
-      <template>
-      <style>
-        ai-dialog-overlay.active {
-          background-color: black;
-          opacity: .5;
+    </ag-grid-aurelia>
+  </div>
+</template>
+```
+- danh-sach-doi-tac.ts
+```javascript
+import axios from 'axios';
+import { SaveDoiTac } from './dialogs/save-doi-tac';
+import { DialogService } from 'aurelia-dialog';
+import swal from 'sweetalert';
+import { logger } from './logger';
+import { GridOptions } from 'ag-grid';
+import { GridApi } from 'ag-grid';
+import { QuanLyDoiTacServiceInterface } from './services/QuanLyDoiTacServiceInterFace';
+import { QuanLyDoiTacServicePrototype } from './services/QuanLyDoiTacServicePrototype';
+import { inject } from 'aurelia-dependency-injection';
+import { DoiTac } from './models/doi-tac';
+@inject(QuanLyDoiTacServicePrototype, DialogService)
+export class DanhSachDoiTac {
+    listItem: DoiTac[] = [];
+    selectedItem: DoiTac;
+    selectedItems: DoiTac[] = [];
+    filter: any;
+
+    // ag-GridApi
+    gridOptions: GridOptions;
+    api: GridApi;
+    columnDefs: any[];
+
+    constructor(private quanLyDoiTacSrv: QuanLyDoiTacServiceInterface, private dialogService: DialogService) {
+        this.columnDefs = [
+            {
+                headerName: "Chọn",
+                width: 30,
+                headerCheckboxSelection: true,
+                headerCheckboxSelectionFilteredOnly: true,
+                checkboxSelection: true
+            },
+            {
+                headerName: "Mã", field: "Id", filter: 'number'
+            },
+            { headerName: "Tên", field: "Ten", filter: 'text', filterParams: { apply: true, newRowsAction: 'keep' }, suppressMenu: false, suppressSorting: true },
+            { headerName: "Địa Chỉ", field: "DiaChi", filter: 'text', filterParams: { newRowsAction: 'keep' }, suppressMenu: false, suppressSorting: true },
+            {
+                headerName: "Hành động",
+                suppressMenu: true,
+                suppressSorting: true,
+                template:
+                `<button type="button" class="btn btn-default btn-xs" data-action-type="edit">
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Chi tiết
+        </button>
+        `
+            }
+        ];
+        this.gridOptions = {
+            enableSorting: true,
+            enableFilter: true,
+            enableColResize: true,
+            paginationPageSize: 20,
+            columnDefs: this.columnDefs,
+            rowModelType: 'pagination',
+            rowSelection: 'multiple',
+            animateRows: true,
+            getRowNodeId: function (item) {
+                return item.Id;
+            }
+        };
+    }
+    activate() {
+        return this.quanLyDoiTacSrv.GetDoiTacs().then((res) => {
+            this.listItem = res;
+        })
+    }
+    onReady() {
+        this.createNewDatasource();
+    }
+    createNewDatasource() {
+        this.selectedItems = [];
+        if (!this.listItem) {
+            return;
         }
+        var dataSource = {
+            getRows: (params) => {
 
-      </style>
-      <ai-dialog>
-        <ai-dialog-header>
-        </ai-dialog-header>
-        <ai-dialog-body>
-          <h2>${getTieuDe}</h2>
-          <form submit.delegate="save()">
-            <div class="form-group">
-              <label>Tên</label>
-              <input attach-focus="true" type="text" class="form-control" value.bind="nhanVienDto.HoTen & validateOnChange">
-            </div>
-            <div class="form-group">
-              <label>Email</label>
-              <input type="text" class="form-control" value.bind="nhanVienDto.Email & validate">
-            </div>
-            <div class="form-group">
-              <label>Chức vụ</label>
-              <input type="text" class="form-control" value.bind="nhanVienDto.ChucVu & validate">
-            </div>
+                this.quanLyDoiTacSrv.GetDoiTacs().then(res => {
+                    this.listItem = res;
+                    var rowsThisPage = this.listItem.slice(params.startRow, params.endRow);
+                    var lastRow = -1;
+                    if (this.listItem.length <= params.endRow) {
+                        lastRow = this.listItem.length;
+                    }
+                    params.successCallback(rowsThisPage, lastRow);
+                })
+            },
+            rowCount: this.listItem.length
+        };
 
-            <button class="btn btn-primary" type="submit">Ok</button>
-            <button class="btn btn-warning" click.trigger="controller.cancel()">Cancel</button>
-          </form>
-        </ai-dialog-body>
-      </ai-dialog>
-    </template>
+        this.gridOptions.api.setDatasource(dataSource);
 
-  ```
-  - luu-nhan-vien.ts
-  ```javascript
+    }
+    public onRowClicked(e) {
+        logger.debug('row clicked', e);
+        this.selectedItem = new DoiTac(e.data);
+        if (e.event.target !== undefined) {
+            let data = e.data;
+            let actionType = e.event.target.getAttribute("data-action-type");
 
-    import { BootstrapFormRenderer } from './../../../helpers/bootstrap-form-renderer';
-    import { inject } from 'aurelia-framework';
-    import { NhanVien } from './../models/nhan-vien';
-    import { DialogController } from "aurelia-dialog";
-    import { ValidationControllerFactory, ValidationController } from "aurelia-validation";
-    @inject(DialogController, ValidationControllerFactory)
-
-    export class SaveNhanVien {
-        validationcontroller: ValidationController;
-        constructor(private controller, private controllerFactory) {
-            this.validationcontroller = controllerFactory.createForCurrentScope();
-            this.validationcontroller.addRenderer(new BootstrapFormRenderer());
-        }
-        get getTieuDe() {
-            switch (this.nhanVienDto.MaNv) {
-                case 0:
-                    return "Thêm mới nhân viên";
-
-                default:
-                    return "Cập nhật nhân viên";
+            switch (actionType) {
+                case "edit":
+                    return this.onActionEditClick();
             }
         }
-        nhanVienDto: NhanVien;
-        activate(dto: NhanVien) {
-            console.log('dto', dto);
-            this.nhanVienDto = dto;
-        }
-        save() {
-            this.validationcontroller.validate().then((result) => {
-                if (result.valid) {
-                    this.controller.ok(this.nhanVienDto);
+    }
+    public onActionViewClick(data: DoiTac) {
+        logger.info("View action clicked", data);
+    }
+
+
+    public onActionEditClick() {
+        this.dialogService.open({ viewModel: SaveDoiTac, model: this.selectedItem }).then((result) => {
+            if (!result.wasCancelled) {
+                logger.info('Save', result.output);
+                let editedDoiTac = result.output;
+                this.quanLyDoiTacSrv.PutDoiTac(editedDoiTac).then((res) => {
+                    swal("Thành công", "Lưu thành công", "success");
+                    this.createNewDatasource();
+                }).catch((err) => {
+
+                    swal("Không thành công", `${err}`, "error")
+                });
+            } else {
+                logger.info("Cancel");
+            }
+        });
+    }
+
+    themMoiDoiTac() {
+        this.dialogService.open({ viewModel: SaveDoiTac, model: new DoiTac() }).then((result) => {
+            if (!result.wasCancelled) {
+                logger.info('Save', result.output);
+                let themMoiDoiTac: DoiTac = result.output;
+                this.quanLyDoiTacSrv.PostDoiTac(themMoiDoiTac)
+                    .then((res) => {
+                        swal("Thành công", "Lưu thành công", "success");
+                        this.createNewDatasource();
+                    }).catch((err) => {
+
+                        swal("Không thành công", `${err}`, "error")
+                    });
+            } else {
+                logger.info('Cancel');
+            }
+        });
+    }
+
+    //ag-grid events
+    onRowDoubleClicked(e) {
+        let doiTac = new DoiTac(e.data);
+        this.onActionEditClick();
+    }
+    onRowSelected(e) {
+        this.selectedItems = this.gridOptions.api.getSelectedRows().map(x => new DoiTac(x));
+    }
+    deselectAll() {
+        this.gridOptions.api.deselectAll();
+    }
+
+    // view events
+    deleteSelected() {
+        let Ids = this.selectedItems.map(x => x.Id);
+        swal({
+            title: "Bạn có chắc xóa không",
+            text: "Bạn sẽ không khôi phục lại được nhân viên nếu đã bị xóa",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Có, Xóa",
+            cancelButtonText: "Không, hủy thao tác!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+            (isConfirm) => {
+                if (isConfirm) {
+                    this.quanLyDoiTacSrv.DeleteDoiTacs(Ids)
+                        .then(res => {
+                            swal("Thành công", "Lưu thành công", "success");
+                            this.selectedItems = [];
+                            this.createNewDatasource();
+                        }).catch((err) => {
+
+                            swal("Không thành công", `${err}`, "error")
+                        });
+                } else {
+                    swal("Đã hủy", "đã hủy thao tác", "error");
                 }
             })
 
-        }
-
     }
-  ```
-  
+    search() {
+        this.quanLyDoiTacSrv.GetDoiTacsByFilter(this.filter)
+            .then(data => { this.listItem = data })
+            .catch(err => {
+                swal('Lỗi', err, 'error');
+            })
+    }
 
 
-
-
+}
+```
