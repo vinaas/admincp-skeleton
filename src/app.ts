@@ -33,7 +33,11 @@ export class App {
       },
       {
         route: 'logout', name: 'logout', moduleId: 'modules/logout/index', nav: false
-      }
+      },
+      {
+        route: 'demo', name: 'demo', moduleId: 'modules/demo/index', nav: true, title: 'Demo',
+        settings: { icon: 'pg-tables' }
+      },
     ]);
 
     this.router = router;
