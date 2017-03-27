@@ -2,7 +2,7 @@
 
 ### Thêm 1 module "Quản lý đối tác"
 
-Cấu trúc thư mục:
+#### Cấu trúc thư mục:
 ```html
 /src
   |__modules
@@ -23,6 +23,7 @@ Cấu trúc thư mục:
   |__app.ts // định nghĩa root router(app level)
 
   ```
+#### Các bước
 
 1. Tạo 1 folder `quan-ly-doi-tac` trong thư mục `/src/modules/`
 2. Tạo router, logger cho module `quan-ly-doi-tac` [commit tại đây](https://github.com/easywebhub/admincp-skeleton/commit/433b0f0264b908cf95cc55f4cd85a94698a3b3f7)
@@ -408,3 +409,14 @@ export class DanhSachDoiTac {
 
 }
 ```
+
+6. Định nghĩa module `Quản lý đối tác` trong root router
+- src/app.ts, thêm một đối tượng route trong config.map
+
+```javascript
+ {
+        route: 'quan-ly-doi-tac', name: 'quan-ly-doi-tac', moduleId: 'modules/quan-ly-doi-tac/index', nav: true, title: 'Quản lý đối tác',
+        settings: { icon: 'pg-tables' }
+      }
+```
+**END**
