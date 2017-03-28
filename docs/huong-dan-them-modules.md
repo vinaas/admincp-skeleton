@@ -257,7 +257,7 @@ export class SaveDoiTac {
               })
           }
        ```
-6. Định nghĩa module `Quản lý đối tác` trong root router
+7. Định nghĩa module `Quản lý đối tác` trong root router
 - src/app.ts, thêm một đối tượng route trong config.map
 
 ```javascript
