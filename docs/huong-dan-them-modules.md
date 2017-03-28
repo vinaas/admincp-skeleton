@@ -228,7 +228,19 @@ export class SaveDoiTac {
        
      - **Filter**
        - bind filter lên view
-       
+        ```html
+          <form class="form-inline" submit.delegate="search()">
+            <div class="form-group">
+              <label for="Ten">Tên</label>
+              <input type="Ten" class="form-control" id="Ten" value.bind="filter.Ten">
+            </div>
+            <div class="form-group">
+              <label for="diaChi">Địa Chỉ</label>
+              <input type="text" class="form-control" id="diaChi" value.bind="filter.DiaChi">
+            </div>
+            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+          </form>
+        ```
        - apply khi submit form filter
 
        ```javascript
