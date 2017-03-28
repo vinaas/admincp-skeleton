@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { SaveDoiTac } from './dialogs/save-doi-tac';
 import { DialogService } from 'aurelia-dialog';
-import swal from 'sweetalert';
+import  swal from 'sweetalert';
 import { logger } from './logger';
 import { GridOptions } from 'ag-grid';
 import { GridApi } from 'ag-grid';
@@ -66,9 +66,9 @@ export class DanhSachDoiTac {
         })
     }
     onReady() {
-        this.createNewDatasource();
+        this.loadDatasource();
     }
-    createNewDatasource() {
+    loadDatasource() {
         this.selectedItems = [];
         if (!this.listItem) {
             return;
@@ -116,8 +116,8 @@ export class DanhSachDoiTac {
                 logger.info('Save', result.output);
                 let editedDoiTac = result.output;
                 this.quanLyDoiTacSrv.PutDoiTac(editedDoiTac).then((res) => {
-                    swal("Thành công", "Lưu thành công", "success");
-                    this.createNewDatasource();
+                    swal("Thành công", "Lưu thành công", 200, "success");
+                    this.loadDatasource();
                 }).catch((err) => {
 
                     swal("Không thành công", `${err}`, "error")
@@ -129,14 +129,15 @@ export class DanhSachDoiTac {
     }
 
     themMoiDoiTac() {
-        this.dialogService.open({ viewModel: SaveDoiTac, model: new DoiTac() }).then((result) => {
+        this.selectedItem = new DoiTac();
+        this.dialogService.open({ viewModel: SaveDoiTac, model: this.selectedItem }).then((result) => {
             if (!result.wasCancelled) {
                 logger.info('Save', result.output);
                 let themMoiDoiTac: DoiTac = result.output;
                 this.quanLyDoiTacSrv.PostDoiTac(themMoiDoiTac)
                     .then((res) => {
                         swal("Thành công", "Lưu thành công", "success");
-                        this.createNewDatasource();
+                        this.loadDatasource();
                     }).catch((err) => {
 
                         swal("Không thành công", `${err}`, "error")
@@ -179,7 +180,7 @@ export class DanhSachDoiTac {
                         .then(res => {
                             swal("Thành công", "Lưu thành công", "success");
                             this.selectedItems = [];
-                            this.createNewDatasource();
+                            this.loadDatasource();
                         }).catch((err) => {
 
                             swal("Không thành công", `${err}`, "error")
