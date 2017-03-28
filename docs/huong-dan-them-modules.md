@@ -208,9 +208,11 @@ export class SaveDoiTac {
   - **Load danh sách đối tác lên ag-grid**
       - lấy danh sách đối tác từ service rồi gán vào property `listItem`
      ```javascript
-    this.quanLyDoiTacSrv.GetDoiTacs().then((res) => {
-            this.listItem = res;
-        })
+     activate(){
+       this.quanLyDoiTacSrv.GetDoiTacs().then((res) => {
+              this.listItem = res;
+          })
+       }
      ```
      - apply lên ag-grid bằng cách gọi method `loadDatasource()`
    - **Thêm mới đối tác**
@@ -219,11 +221,14 @@ export class SaveDoiTac {
         themMoiDoiTac() {
          this.selectedItem = new DoiTac();
         this.dialogService.open({ viewModel: SaveDoiTac, model: this.selectedItem }).then...
+        }
         ```
     - **Cập nhật đối tác**
         - khi chọn 1 đối tác để cập nhật,  property selectedItem lúc này đã có giá trị, là đối tượng đối tác đang được chọn
        ```javascript
-        this.dialogService.open({ viewModel: SaveDoiTac, model: this.selectedItem }).then...
+         public onActionEditClick() {
+            this.dialogService.open({ viewModel: SaveDoiTac, model: this.selectedItem }).then...
+            }
        ```
        
      - **Filter**
@@ -244,11 +249,13 @@ export class SaveDoiTac {
        - apply khi submit form filter
 
        ```javascript
-        this.quanLyDoiTacSrv.GetDoiTacsByFilter(this.filter)
-            .then(data => { this.listItem = data })
-            .catch(err => {
-                swal('Lỗi', err, 'error');
-            })
+          search() {
+          this.quanLyDoiTacSrv.GetDoiTacsByFilter(this.filter)
+              .then(data => { this.listItem = data })
+              .catch(err => {
+                  swal('Lỗi', err, 'error');
+              })
+          }
        ```
 6. Định nghĩa module `Quản lý đối tác` trong root router
 - src/app.ts, thêm một đối tượng route trong config.map
