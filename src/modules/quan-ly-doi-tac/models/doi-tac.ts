@@ -1,17 +1,17 @@
 export class DoiTac {
-    Id: number;
-    Ten: String;
-    DiaChi: String;
+    id: number;
+    ten: String;
+    diaChi: String;
     constructor(doiTac: any = { Id: 0 }) {
-        this.Id = doiTac.Id;
-        this.Ten = doiTac.Ten;
-        this.DiaChi = doiTac.DiaChi;    
+        this.id = doiTac.id;
+        this.ten = doiTac.ten;
+        this.diaChi = doiTac.diaChi;    
     }
 }
 
 // define validation model
 import { ValidationRules } from 'aurelia-validation';
 ValidationRules
-    .ensure((x: DoiTac) => x.Ten).required()
-    .ensure(x => x.DiaChi).required()
+    .ensure((x: DoiTac) => x.ten).required()
+    .ensure(x => x.diaChi).required()
     .on(DoiTac);

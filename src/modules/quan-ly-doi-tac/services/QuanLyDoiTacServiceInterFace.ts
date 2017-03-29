@@ -1,10 +1,10 @@
 import { DoiTac } from "../models/doi-tac";
 export interface QuanLyDoiTacServiceInterface {
-  GetDoiTac(maNv: number): Promise<DoiTac>;
-  GetDoiTacs(): Promise<Array<DoiTac>>;
-  PostDoiTac(DoiTac: DoiTac): Promise<DoiTac>;
-  PutDoiTac(DoiTac: DoiTac): Promise<boolean>;
-  DeleteDoiTac(maNv: number): Promise<boolean>;
-  DeleteDoiTacs(maNvs: number[]): Promise<boolean>;
-  GetDoiTacsByFilter(filter: any): Promise<Array<DoiTac>>;
+  getDoiTac(maNv: number): Promise<DoiTac>;
+  getDoiTacs(): Promise<Array<DoiTac>>;
+  postDoiTac(DoiTac: DoiTac): Promise<DoiTac>;
+  putDoiTac(DoiTac: DoiTac): Promise<boolean>;
+  deleteDoiTac(maNv: number): Promise<boolean>;
+  deleteDoiTacs(maNvs: number[]): Promise<boolean>;
+  getDoiTacsByFilter(filter: any): Promise<Array<DoiTac>>;
 }

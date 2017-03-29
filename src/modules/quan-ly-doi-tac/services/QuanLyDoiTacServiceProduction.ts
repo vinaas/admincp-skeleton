@@ -1,28 +1,28 @@
 import { DoiTac } from './../models/doi-tac';
 import { QuanLyDoiTacServiceInterface } from './QuanLyDoiTacServiceInterFace';
 export class QuanLyDoiTacServiceProduction implements QuanLyDoiTacServiceInterface {
-    GetDoiTacsByFilter(filter: any):  Promise<Array<DoiTac>> {
-        throw new Error('Method not implemented.');
-    }
+  getDoiTac(maNv: number): Promise<DoiTac> {
+    throw new Error('Method not implemented.');
+  }
+  getDoiTacs(): Promise<DoiTac[]> {
+    throw new Error('Method not implemented.');
+  }
+  postDoiTac(DoiTac: DoiTac): Promise<DoiTac> {
+    throw new Error('Method not implemented.');
+  }
+  putDoiTac(DoiTac: DoiTac): Promise<boolean> {
+    throw new Error('Method not implemented.');
+  }
+  deleteDoiTac(maNv: number): Promise<boolean> {
+    throw new Error('Method not implemented.');
+  }
+  deleteDoiTacs(maNvs: number[]): Promise<boolean> {
+    throw new Error('Method not implemented.');
+  }
+  getDoiTacsByFilter(filter: any): Promise<DoiTac[]> {
+    throw new Error('Method not implemented.');
+  }
 
-    GetDoiTac(maNv: number): Promise<DoiTac> {
-        throw new Error('Method not implemented.');
-    }
-    GetDoiTacs(): Promise<DoiTac[]> {
-        throw new Error('Method not implemented.');
-    }
-    PostDoiTac(DoiTac: DoiTac): Promise<DoiTac> {
-        throw new Error('Method not implemented.');
-    }
-    PutDoiTac(DoiTac: DoiTac): Promise<boolean> {
-        throw new Error('Method not implemented.');
-    }
-    DeleteDoiTac(maNv: number): Promise<boolean> {
-        throw new Error('Method not implemented.');
-    }
-    DeleteDoiTacs(maNvs: number[]): Promise<boolean> {
-        throw new Error('Method not implemented.');
-    }
-
+   
 
 }

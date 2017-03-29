@@ -65,11 +65,11 @@ export async function configure(aurelia: Aurelia) {
 var firebase = require("firebase/app");
 require("firebase/database");
 var config = {
-  apiKey: "AIzaSyC_fEKlapEbfm3yBtnnzttuqF5IOykQURQ",
-  authDomain: "admincp-skeleton-db.firebaseapp.com",
-  databaseURL: "https://admincp-skeleton-db.firebaseio.com",
-  storageBucket: "admincp-skeleton-db.appspot.com",
-  messagingSenderId: "593494488415"
+  apiKey: "AIzaSyCvnTyBRHe4ejecmZmVWI9zTy0s4Kzk7bY",
+  authDomain: "admincp-spa-vta.firebaseapp.com",
+  databaseURL: "https://admincp-spa-vta.firebaseio.com",
+  storageBucket: "admincp-spa-vta.appspot.com",
+  messagingSenderId: "1086862215257"
 };
 firebase.initializeApp(config);
 

@@ -16,7 +16,7 @@ export class SaveDoiTac {
     }
 
     get getTieuDe() {
-        switch (this.doiTacDto.Id) {
+        switch (this.doiTacDto.id) {
             case 0:
                 return "Thêm mới";
 
