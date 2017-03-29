@@ -20,14 +20,6 @@ export class App {
         settings: { icon: 'pg-home' }
       },
       {
-        route: 'quan-ly-nhan-vien', name: 'quan-ly-nhan-vien', moduleId: 'modules/quan-ly-nhan-vien/index', nav: true, title: 'Quản lý nhân viên',
-        settings: { icon: 'pg-tables' }
-      },
-      {
-        route: 'quan-ly-phong-ban', name: 'quan-ly-phong-ban', moduleId: 'modules/quan-ly-phong-ban/index', nav: true, title: 'Quản lý phòng ban',
-        settings: { icon: 'pg-tables' }
-      },
-      {
         route: 'quan-ly-doi-tac', name: 'quan-ly-doi-tac', moduleId: 'modules/quan-ly-doi-tac/index', nav: true, title: 'Quản lý đối tác',
         settings: { icon: 'pg-tables' }
       },

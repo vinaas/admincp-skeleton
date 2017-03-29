@@ -120,7 +120,7 @@ export class DanhSachDoiTac {
                 logger.info('Save', result.output);
                 let editedDoiTac = result.output;
                 this.quanLyDoiTacSrv.PutDoiTac(editedDoiTac).then((res) => {
-                    swal("Thành công", "Lưu thành công", 200, "success");
+                    swal("Thành công", "Lưu thành công", "success");
                     this.loadDatasource();
                 }).catch((err) => {
 
