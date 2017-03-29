@@ -5,9 +5,9 @@
     </div>
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
       <div class="btn-group">
-        <button disabled.bind="selectdRows.length===0" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+        <button disabled.bind="selectedList.length===0" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-    Đã chọn (${selectdRows.length}) <span class="caret"></span>
+    Đã chọn (${selectedList.length}) <span class="caret"></span>
   </button>
         <ul class="dropdown-menu">
           <li click.delegate="deleteSelected()"><a href="javascript:void(0)">Xóa</a></li>

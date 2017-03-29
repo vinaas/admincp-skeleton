@@ -1,4 +1,4 @@
-<template>
+export const childViewer: string = `<template>
 
   <div class="bar">
     <div class="pull-right">
@@ -8,9 +8,9 @@
     </div>
     <div class="bar-inner">
       <ul>
-        <li repeat.for="row of router.navigation" class="${row.isActive ? 'active' : ''}">
+        <li repeat.for="row of router.navigation" class="\${row.isActive ? 'active' : ''}">
           <a href.bind="row.href">
-            <span class="">${row.title}</span>
+            <span class="">\${row.title}</span>
           </a>
         </li>
 
@@ -22,14 +22,7 @@
   <!-- START CONTAINER FLUID -->
   <div class="container-fluid container-fixed-lg">
     <div class="inner">
-        <!-- START BREADCRUMB -->
-        <ul class="breadcrumb">
-          <li>
-            <p>${router.parent.currentInstruction.config.title}</p>
-          </li>
-          <li><a  class="active">${router.currentInstruction.config.title}</a>
-          </li>
-        </ul>
+        
     <!-- BEGIN PlACE PAGE CONTENT HERE -->
     <router-view></router-view>
 
@@ -39,3 +32,4 @@
   </div>
   <!-- END PAGE CONTENT -->
 </template>
+`

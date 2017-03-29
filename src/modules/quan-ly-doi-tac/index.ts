@@ -1,14 +1,14 @@
 import { childViewer } from './../../helpers/child-viewer';
-import { inlineView } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { Router, RouterConfiguration } from 'aurelia-router';
+import { inlineView } from "aurelia-templating";
 @inlineView(childViewer)
-export class QuanLyNhanVien {
+export class QuanLyDoiTac {
     router: Router;
-    heading = 'Quản lý nhân viên';
+    heading = 'Quản lý đổi tác';
     configureRouter(config: RouterConfiguration, router: Router) {
         config.map([
-            { route: ['', 'danh-sach-nhan-vien'], name: 'danh-sach-nhan-vien', moduleId: './danh-sach-nhan-vien', nav: true, title: 'Danh sách nhân viên' }]);
+            { route: ['', 'danh-sach-doi-tac'], name: 'danh-sach-doi-tac', moduleId: './danh-sach-doi-tac', nav: true, title: 'Danh sách đổi tác' }]);
         this.router = router;
     }
 }
