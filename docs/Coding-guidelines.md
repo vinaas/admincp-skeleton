@@ -1,5 +1,5 @@
 **NOTE: Coding Guidelines for TypeScript.**
-## Reference [link](https://github.com/Microsoft/TypeScript-wiki/edit/master/Coding-guidelines.md)
+## Reference [link](https://github.com/Microsoft/TypeScript-wiki/blob/master/Coding-guidelines.md)
 ## Names
 
 1. Use PascalCase for type names.
